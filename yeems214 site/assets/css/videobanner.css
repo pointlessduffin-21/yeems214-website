@@ -1,0 +1,27 @@
+#heroVideo {
+    position: relative;
+    right: 0;
+    top: 0;
+    min-width: 100%; 
+    opacity: 0.8;
+    overflow-wrap: nowrap;
+    background-position: center 0px;
+    size: cover;
+  } 
+
+  header.masthead {
+    position: relative;
+  }
+  
+  header.masthead video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .deez {
+    z-index: 999999;
+  }
