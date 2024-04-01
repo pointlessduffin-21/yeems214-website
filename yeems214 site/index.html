@@ -8,7 +8,7 @@
     <title>Roel Abarca</title>
     <meta property="og:site_name" content="yeems214" />
     <meta property="og:title" content="Roel Abarca" />
-    <meta property="og:description" content="I am Roel. Welcome to my portfolio!" />
+    <meta property="og:description" content="I am Roel. I am passionate about tech." />
     <meta property="og:image" content="assets/img/resized_memoji2.png" />
     <link rel="icon" href="assets/img/photos-of-me/resized memoji111.png">
     <link rel="stylesheet" href="assets/css/videobanner.css">
@@ -30,6 +30,16 @@
         @media (max-width: 575.98px) {
         .mt-xs-3 {
             margin-top: 1rem !important;
+        }
+
+        .equal-height > .col > div {
+            flex-grow: 1;
+        }
+
+        .flex-bottom {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 }
     </style>
@@ -61,7 +71,7 @@
         </video>
         <div class="container my-auto text-center text-white" style="z-index: 0;">
           <h1 class="mb-1">Roel Abarca</h1>
-          <h3 class="mb-5"><em>Full Stack Developer | SysAdmin | Video Editor | Audio Editor | Nerd</em></h3>
+          <h3 class="mb-5"><em>Full Stack Developer | Hobbyist Dev | SysAdmin | Video Editor | Audiophile | Nerd</em></h3>
           <a class="btn btn-primary btn-xl js-scroll-trigger mb-sm-1" role="button" href="#about">More Info</a>
           <a class="btn btn-primary btn-xl js-scroll-trigger mb-sm-1 mb-s" role="button" href="https://yeems214.xyz/cv-video.html">Curriculum Vitae Video</a>
           <a class="btn btn-primary btn-xl js-scroll-trigger mb-sm-1 mb-s" role="button" href="https://gpupv.yeems214.xyz/">Lair</a>
@@ -160,9 +170,9 @@
                 <div class="col item"><img class="img-fluid" src="assets\img\skills\java.jpg"></a></div>
                 <div class="col item"><img class="img-fluid" src="assets\img\skills\typescript.jpg"></a></div>
                 <div class="col item"><img class="img-fluid" src="assets\img\skills\github.jpg"></a></div>
-                <!-- <div class="col item"><img class="img-fluid" src="assets\img\skills\python.jpg"></a></div>
-                <div class="col item"><img class="img-fluid" src="assets\img\skills\shell.jpg"></a></div>
-                <div class="col item"><img class="img-fluid" src="assets\img\skills\powershell.jpg"></a></div> -->
+                <div class="col item"><img class="img-fluid" src="assets\img\skills\python.png"></a></div>
+                <div class="col item"><img class="img-fluid" src="assets\img\skills\bash.png"></a></div>
+                <div class="col item"><img class="img-fluid" src="assets\img\skills\batch.png"></a></div>
             </div>
 
             <div class="content-section-heading">
@@ -207,12 +217,13 @@
             <div class="content-section-heading">
                 <br /> <br />
                 <h2 class="mb-9">Artificial Intelligence (AI)</h2>
-                <h3 class="text-secondary mb-5">Futuristic stuff... All self hosted as well ;)</h3>
+                <h3 class="text-secondary mb-5">Futuristic stuff...</h3>
             </div>
 
             <div class="row gx-2 gy-2 row-cols-1 row-cols-md-2 row-cols-xl-3 photos" data-bss-baguettebox="">
-                <div class="col item"><img class="img-fluid" src="assets\img\skills\stable_diffusion.png"></a></div>
+                <div class="col item"><img class="img-fluid" src="assets\img\skills\aistudio.png"></a></div>
                 <div class="col item"><img class="img-fluid" src="assets\img\skills\llama2.png"></a></div>
+                <div class="col item"><img class="img-fluid" src="assets\img\skills\stable_diffusion.png"></a></div>
                 <!-- <div class="col item"><img class="img-fluid" src="https://cdn.bootstrapstudio.io/placeholders/Whisper.png"></a></div>
                 <div class="col item"><img class="img-fluid" src="https://cdn.bootstrapstudio.io/placeholders/PyTorch.png"></a></div>
                 <div class="col item"><img class="img-fluid" src="https://cdn.bootstrapstudio.io/placeholders/TensorFlow.png"></a></div>
@@ -234,10 +245,10 @@
                     <h2 class="mb-5">Recent Projects</h2>
                 </div>
             </div>
-            <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
+            <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3 equal-height">
                 <div class="col">
                     <div><img class="rounded img-fluid d-block w-100 fit-cover" style="height: 200px;" src="assets\img\projects\diana.png">
-                        <div class="py-4">
+                        <div class="py-4 flex-bottom">
                             <h4>Diana AI</h4>
                             <p><b>Technologies: </b>Python, Google AI Studio, Google Gemini 1.0 Pro</p>
                             <p><b>Works on: </b>Windows, macOS, Linux</p>
@@ -249,7 +260,7 @@
                 </div>
                 <div class="col">
                     <div><img class="rounded img-fluid d-block w-100 fit-cover" style="height: 200px;" src="assets\img\projects\duffinmusicplayer2.png">
-                        <div class="py-4">
+                        <div class="py-4 flex-bottom">
                             <h4>Duffin's Music Player</h4>
                             <p><b>Technologies: </b>Java, Maven, SQLite, Python, FFmpeg</p>
                             <p><b>Works on: </b>Windows, macOS, Linux</p>
@@ -261,7 +272,7 @@
                 </div>
                 <!-- <div class="col">
                     <div><img class="rounded img-fluid d-block w-100 fit-cover" style="height: 200px;" src="?width=1400&height=800">
-                        <div class="py-4">
+                        <div class="py-4 flex-bottom">
                             <h4>Video Jockey for Kawayan sa Casili Festival 2023</h4>
                             <p><b>Technologies: </b>Adobe After Effects, Photoshop, DALL-E 3</p>
                             <p><b>Date of Creation: </b>October 2023</p>
@@ -272,7 +283,7 @@
                 </div> -->
                 <!-- <div class="col">
                     <div><img class="rounded img-fluid d-block w-100 fit-cover" style="height: 200px;" src="https://media.discordapp.net/attachments/1125711042731855873/1153721533685051513/image.png?width=1400&height=800">
-                        <div class="py-4">
+                        <div class="py-4 flex-bottom">
                             <h4>Easy JPG to ASCII Converter</h4>
                             <p><b>Technologies: </b>Shell, Curl, jp2a</p>
                             <p><b>Date of Creation: </b>September 2023</p>
@@ -283,7 +294,7 @@
                 </div> -->
                 <!-- <div class="col">
                     <div><img class="rounded img-fluid d-block w-100 fit-cover" style="height: 200px;" src="assets/img/projects/sharex.png?width=1400&height=800">
-                        <div class="py-4">
+                        <div class="py-4 flex-bottom">
                             <h4>ShareX Image Server</h4>
                             <p><b>Technologies: </b>JSP, Spring Boot, MySQL</p>
                             <p><b>Date of Creation: </b>August 2023</p>
@@ -294,7 +305,7 @@
                 </div> -->
                 <div class="col">
                     <div><img class="rounded img-fluid d-block w-100 fit-cover" style="height: 200px;" src="assets\img\projects\mow.png?width=1400&height=800">
-                        <div class="py-4">
+                        <div class="py-4 flex-bottom">
                             <h4>Meals on Wheels</h4>
                             <p><b>Technologies: </b>JSP, CSS, Spring Boot, MySQL</p>
                             <p><b>Date of Creation: </b>August 2023</p>
@@ -306,7 +317,7 @@
                 </div>
                 <div class="col">
                     <div><img class="rounded img-fluid d-block w-100 fit-cover" style="height: 200px;" src="assets\img\projects\api1.png?width=1400&height=800">
-                        <div class="py-4">
+                        <div class="py-4 flex-bottom">
                             <h4>Know Your Neighborhood</h4>
                             <p><b>Technologies: </b>ReactJS, CSS, Spring Boot, MySQL</p>
                             <p><b>Date of Creation: </b>April 2023</p>
@@ -317,7 +328,7 @@
                 </div>
                 <div class="col">
                     <div><img class="rounded img-fluid d-block w-100 fit-cover" style="height: 200px;" src="assets/img/projects/abc-cars.png?width=1400&height=800">
-                        <div class="py-4">
+                        <div class="py-4 flex-bottom">
                             <h4>ABC Cars</h4>
                             <p><b>Technologies: </b> JSP, CSS, Spring Boot, MySQL</p>
                             <p><b>Date of Creation: </b>April 2023</p>
@@ -328,7 +339,7 @@
                 </div>
                 <div class="col">
                     <div><img class="rounded img-fluid d-block w-100 fit-cover" style="height: 200px;" src="assets\img\projects\self-hosted.png?width=1400&height=800">
-                        <div class="py-4">
+                        <div class="py-4 flex-bottom">
                             <h4>Server Hosting: yeems214.xyz</h4>
                             <p><b>Technologies: </b>Windows, Cloudflare Argo Tunnel, Docker, Nginx</p>
                             <p><b>Date of Creation: </b>March 2023</p>
@@ -339,7 +350,7 @@
                 </div>
                 <div class="col">
                     <div><img class="rounded img-fluid d-block w-100 fit-cover" style="height: 200px;" src="assets\img\projects\wdf.png?width=1400&height=800">
-                        <div class="py-4">
+                        <div class="py-4 flex-bottom">
                             <h4>ABC Jobs</h4>
                             <p><b>Technologies: </b>JSP, CSS, Spring MVC, MySQL</p>
                             <p><b>Date of Creation: </b>February 2023</p>
@@ -351,9 +362,10 @@
                 </div>
                 <div class="col">
                     <div><img class="rounded img-fluid d-block w-100 fit-cover" style="height: 200px;" src="assets\img\projects\pfs-mcq.png?width=1400&height=800">
-                        <div class="py-4">
-                            <h4>Java-based Multiple-Choice Exam Program</h4>
+                        <div class="py-4 flex-bottom">
+                            <h4>Simple Multiple-Choice Exam with CSV support</h4>
                             <p><b>Technologies: </b> Java</p>
+                            <p><b>Works on: </b>Windows, macOS, Linux</p>
                             <p><b>Date of Creation: </b>October 2022</p>
                             <p>For our second module at Lithan, we created a CLI-only Multiple Choice Questionnaire program using Java. The project showcased my Java and decision-making skills, using .CSV files to store questionnaires and aimed for simple deployment and use.</p>
                             <a class="btn btn-primary btn-l js-scroll-trigger" role="button" href="https://github.com/pointlessduffin-21/MCQ">View GitHub Repository</a>
@@ -362,7 +374,7 @@
                 </div>
                 <div class="col">
                     <div><img class="rounded img-fluid d-block w-100 fit-cover" style="height: 200px;" src="assets\img\projects\fed-front1.png?width=1400&height=800">
-                        <div class="py-4">
+                        <div class="py-4 flex-bottom">
                             <h4>ABC Learning Center</h4>
                             <p><b>Technologies: </b>HTML, CSS, JavaScript, Apache HTTP</p>
                             <p><b>Date of Creation: </b>September 2022</p>
@@ -374,7 +386,7 @@
                 </div>
                 <div class="col">
                     <div><img class="rounded img-fluid d-block w-100 fit-cover" style="height: 200px;" src="assets\img\projects\condo.png?width=1400&height=800">
-                        <div class="py-4">
+                        <div class="py-4 flex-bottom">
                             <h4>My Condo Setup (Interior Design)</h4>
                             <p><b>Technologies: </b>SketchUp, V-Ray</p>
                             <p><b>Date of Creation: </b>January 2022</p>
@@ -385,7 +397,7 @@
                 </div>
                 <div class="col">
                     <div><img class="rounded img-fluid d-block w-100 fit-cover" style="height: 200px;" src="assets\img\highlights\maxresdefault.png?width=1400&height=800">
-                        <div class="py-4">
+                        <div class="py-4 flex-bottom">
                             <h4>Arduino-powered Earthquake Detection Sensor</h4>
                             <p><b>Technologies: </b>C, Arduino</p>
                             <p><b>Date of Creation: </b>December 2019</p>
@@ -407,7 +419,7 @@
             </div>
 
             <div class="row g-0">
-                <div class="col-lg-6"><a class="portfolio-item" href="https://shiela.yeems214.xyz/links.html">
+                <div class="col-lg-6"><a class="portfolio-item" href="https://www.facebook.com/jvescartin24/posts/pfbid02L8gqhNJkuLiAP3mbfwX24b2NfojYCZhXE6JFh4">
                     <div class="caption">
                         <div class="caption-content">
                             <h2>Startups</h2>
@@ -415,7 +427,7 @@
                         </div>
                     </div><img class="img-fluid" src="assets/img/highlights/startup1.png?width=700&height=467">
                 </a></div>  
-                <div class="col-lg-6"><a class="portfolio-item" href="https://shiela.yeems214.xyz/links.html">
+                <div class="col-lg-6"><a class="portfolio-item" href="https://fb.watch/r9QYINmWmB/">
                     <div class="caption">
                         <div class="caption-content">
                             <h2>Recent Attended Events</h2>
@@ -541,7 +553,7 @@
     <footer class="footer text-center">
         <div class="container">
             <ul class="list-inline mb-5">
-                <li class="list-inline-item">&nbsp;<a class="link-light social-link rounded-circle" href="https://www.facebook.com/PointlessSpunky/"><i class="icon-social-facebook"></i></a></li>
+                <li class="list-inline-item">&nbsp;<a class="link-light social-link rounded-circle" href="https://www.facebook.com/yeems214/"><i class="icon-social-facebook"></i></a></li>
                 <li class="list-inline-item">&nbsp;<a class="link-light social-link rounded-circle" href="https://twitter.com/pointlessduffin"><i class="icon-social-twitter"></i></a></li>
                 <li class="list-inline-item">&nbsp;<a class="link-light social-link rounded-circle" href="https://github.com/pointlessduffin-21"><i class="icon-social-github"></i></a></li>
             </ul>
