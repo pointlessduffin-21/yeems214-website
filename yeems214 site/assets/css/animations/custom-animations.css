@@ -1,0 +1,312 @@
+/* Custom animations and styling by GitHub Copilot */
+
+/* Color Variables */
+:root {
+  --primary-blue: #1e88e5;
+  --dark-blue: #0d47a1;
+  --light-blue: #64b5f6;
+  --accent-blue: #00b0ff;
+  --deep-black: #121212;
+  --soft-black: #1a1a1a;
+  --blue-glow: 0 0 10px rgba(30, 136, 229, 0.7);
+  --blue-pulse: 0 0 15px rgba(0, 176, 255, 0.8);
+}
+
+/* Background Animations */
+.bg-animated {
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-animated::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(125deg, var(--deep-black), var(--dark-blue), var(--deep-black));
+  background-size: 400% 400%;
+  z-index: -1;
+  opacity: 0.85;
+  animation: gradientBG 15s ease infinite;
+}
+
+/* Floating Particles Background */
+.particles-bg {
+  position: relative;
+}
+
+.particles-bg::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(100, 181, 246, 0.2) 1px, transparent 1px),
+    radial-gradient(circle at 75% 75%, rgba(30, 136, 229, 0.15) 1px, transparent 1px);
+  background-size: 50px 50px;
+  z-index: -1;
+  opacity: 0.5;
+  animation: particlesFloat 20s linear infinite;
+}
+
+/* Gradient Background Animation */
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Particles Float Animation */
+@keyframes particlesFloat {
+  0% { background-position: 0 0; }
+  100% { background-position: 50px 50px; }
+}
+
+/* Glowing Text Animation */
+.text-glow {
+  animation: textGlow 3s ease-in-out infinite alternate;
+  text-shadow: 0 0 5px rgba(30, 136, 229, 0.5);
+}
+
+@keyframes textGlow {
+  from { text-shadow: 0 0 5px rgba(30, 136, 229, 0.5); }
+  to { text-shadow: 0 0 20px rgba(0, 176, 255, 0.8), 0 0 30px rgba(30, 136, 229, 0.6); }
+}
+
+/* Button Hover Animation */
+.btn-animated {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  z-index: 1;
+  background: var(--primary-blue);
+  color: white !important;
+  border: none;
+}
+
+.btn-animated::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--dark-blue);
+  z-index: -2;
+}
+
+.btn-animated::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: var(--accent-blue);
+  transition: all 0.3s ease;
+  z-index: -1;
+}
+
+.btn-animated:hover {
+  color: white;
+  box-shadow: var(--blue-glow);
+}
+
+.btn-animated:hover::before {
+  width: 100%;
+}
+
+/* Fade-in animation for sections */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Skill Icons Animation */
+.skill-icon {
+  transition: all 0.3s ease;
+  filter: grayscale(80%);
+}
+
+.skill-icon:hover {
+  transform: translateY(-10px);
+  filter: grayscale(0%) drop-shadow(0 0 8px rgba(30, 136, 229, 0.6));
+}
+
+/* Portfolio Card Hover Effects */
+.portfolio-card {
+  transition: all 0.3s ease;
+  background: rgba(26, 26, 26, 0.9);
+  border: 1px solid rgba(30, 136, 229, 0.2);
+}
+
+.portfolio-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--blue-pulse);
+  border-color: var(--primary-blue);
+}
+
+/* Navbar Item Animation */
+.nav-item a {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-item a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--accent-blue);
+  transition: width 0.3s ease;
+}
+
+.nav-item a:hover::after {
+  width: 100%;
+}
+
+/* Typing text animation */
+.typing-text {
+  border-right: 2px solid var(--accent-blue);
+  white-space: nowrap;
+  overflow: hidden;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: var(--accent-blue) }
+}
+
+/* Clean footer with animated icons */
+.social-link {
+  transition: all 0.3s ease;
+  background: linear-gradient(145deg, var(--primary-blue), var(--dark-blue));
+}
+
+.social-link:hover {
+  transform: translateY(-5px) rotate(360deg);
+  box-shadow: var(--blue-glow);
+}
+
+/* Dark theme colors for main sections */
+.bg-primary {
+  background-color: var(--deep-black) !important;
+  background-image: linear-gradient(60deg, var(--deep-black) 0%, var(--soft-black) 100%);
+}
+
+.bg-light {
+  background-color: var(--soft-black) !important;
+  color: #f8f9fa;
+}
+
+.text-secondary {
+  color: var(--light-blue) !important;
+}
+
+.text-white {
+  color: #f8f9fa !important;
+}
+
+/* Enhanced header with video background */
+header.masthead {
+  position: relative;
+  background: var(--deep-black);
+}
+
+header.masthead::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(18, 18, 18, 0.7), rgba(13, 71, 161, 0.4));
+  z-index: 1;
+}
+
+header.masthead video {
+  filter: saturate(1.2) contrast(1.1);
+}
+
+header.masthead .container {
+  z-index: 2 !important;
+}
+
+/* Floating animation for elements */
+.float-element {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--deep-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-blue);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-blue);
+}
+
+/* Highlight Cards Animation */
+.highlight-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.highlight-card::before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent, rgba(30, 136, 229, 0.3), transparent);
+  transition: all 0.5s;
+}
+
+.highlight-card:hover::before {
+  top: 100%;
+  left: 100%;
+}
+
+/* 3D Tilt Effect */
+.tilt-effect {
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+}
+
+.tilt-effect:hover {
+  transform: perspective(1000px) rotateX(5deg) rotateY(5deg);
+}

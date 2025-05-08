@@ -1,0 +1,181 @@
+/* Particle animations for background */
+.particles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(30, 136, 229, 0.4);
+  pointer-events: none;
+  animation: floatParticle 20s linear infinite;
+}
+
+@keyframes floatParticle {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-30px) translateX(30px);
+  }
+  50% {
+    transform: translateY(-60px) translateX(0);
+  }
+  75% {
+    transform: translateY(-30px) translateX(-30px);
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+}
+
+/* Canvas background for connecting dots */
+#background-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.7;
+}
+
+/* Neon glow effects */
+.neon-blue {
+  text-shadow: 
+    0 0 5px rgba(30, 136, 229, 0.7),
+    0 0 10px rgba(30, 136, 229, 0.5),
+    0 0 20px rgba(30, 136, 229, 0.3);
+}
+
+.glow-border {
+  box-shadow: 
+    0 0 5px rgba(30, 136, 229, 0.7),
+    0 0 10px rgba(30, 136, 229, 0.5);
+  border: 1px solid rgba(30, 136, 229, 0.8);
+}
+
+/* Matrix-like background effect */
+.matrix-bg {
+  position: relative;
+}
+
+.matrix-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+              url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%231e88e5' fill-opacity='0.3' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+  z-index: -1;
+  opacity: 0.12;
+}
+
+/* Animated background gradient for sections */
+.gradient-bg-animate {
+  background: linear-gradient(-45deg, var(--deep-black), var(--dark-blue), var(--primary-blue), var(--soft-black));
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Ripple effect for buttons */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-ripple::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transform: scale(10, 10);
+  opacity: 0;
+  transition: transform 0.5s, opacity 0.8s;
+}
+
+.btn-ripple:active::after {
+  transform: scale(0, 0);
+  opacity: 0.3;
+  transition: 0s;
+}
+
+/* Animated skill bars */
+.skill-bar {
+  height: 10px;
+  margin-bottom: 20px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.skill-bar-inner {
+  height: 100%;
+  width: 0;
+  border-radius: 5px;
+  background-image: linear-gradient(to right, var(--primary-blue), var(--accent-blue));
+  transition: width 1.5s ease-in-out;
+}
+
+/* Rotating icon animation */
+.rotate-icon {
+  animation: rotate 8s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Water-like ripple background */
+.water-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.water-ripple::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background: 
+    radial-gradient(ellipse at center, rgba(30, 136, 229, 0) 0%, rgba(30, 136, 229, 0) 60%, rgba(30, 136, 229, 0.2) 70%, rgba(30, 136, 229, 0) 80%);
+  animation: ripple 15s linear infinite;
+  background-size: 50% 50%;
+  background-position: center center;
+  z-index: -1;
+}
+
+@keyframes ripple {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+}

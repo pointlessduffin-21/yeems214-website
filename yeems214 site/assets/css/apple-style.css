@@ -1,0 +1,537 @@
+/* assets/css/apple-style.css */
+
+:root {
+    --apple-font: 'Poppins', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --apple-dark-bg: #1d1d1f; /* A common Apple dark grey */
+    --apple-black-bg: #000000;
+    --apple-light-text: #f5f5f7; /* A common Apple light text */
+    --apple-secondary-text: #a1a1a6;
+    --apple-blue-accent: #007aff; /* Apple's signature blue */
+    --apple-card-bg: #2c2c2e; /* Slightly lighter than main dark for cards */
+    --apple-border-color: #424245;
+}
+
+body {
+    font-family: var(--apple-font);
+    background-color: var(--apple-black-bg);
+    color: var(--apple-light-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden; /* Prevent horizontal scroll from AOS animations */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--apple-font);
+    font-weight: 600; /* Bolder headings */
+}
+
+p {
+    line-height: 1.7;
+    font-weight: 300; /* Lighter paragraph text */
+}
+
+.lead {
+    font-weight: 400;
+    font-size: 1.25rem;
+}
+.lead-small {
+    font-weight: 300;
+    font-size: 1.1rem;
+    color: var(--apple-secondary-text);
+}
+
+/* Masthead (Header) Styling */
+.masthead-apple {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 35rem;
+    padding: 15rem 0;
+    background-color: var(--apple-black-bg); /* Fallback */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Important for video */
+}
+
+.masthead-apple video#bgVideo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 0;
+    transform: translateX(-50%) translateY(-50%);
+    opacity: 0.4; /* Dim the video */
+}
+
+.masthead-apple .masthead-content {
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.masthead-apple .masthead-content h1 {
+    font-size: 3.5rem; /* Larger text */
+}
+.masthead-apple .masthead-content h3 {
+    font-size: 1.5rem;
+    color: var(--apple-secondary-text);
+}
+
+@media (min-width: 992px) {
+    .masthead-apple .masthead-content h1 {
+        font-size: 5.5rem;
+    }
+    .masthead-apple .masthead-content h3 {
+        font-size: 2rem;
+    }
+}
+
+/* Apple-like Buttons */
+.btn-apple {
+    background-color: var(--apple-blue-accent);
+    color: #fff;
+    border: 1px solid var(--apple-blue-accent);
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    border-radius: 980px; /* Pill shape */
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+.btn-apple:hover, .btn-apple:focus {
+    background-color: #005ec4; /* Darker blue on hover */
+    border-color: #005ec4;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3);
+}
+
+.btn-apple-outline {
+    background-color: transparent;
+    color: var(--apple-blue-accent);
+    border: 1px solid var(--apple-blue-accent);
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    border-radius: 980px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+.btn-apple-outline:hover, .btn-apple-outline:focus {
+    background-color: var(--apple-blue-accent);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 122, 255, 0.2);
+}
+
+.btn-apple.btn-xl, .btn-apple-outline.btn-xl {
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+}
+.btn-apple.btn-lg, .btn-apple-outline.btn-lg {
+    padding: 0.85rem 2rem;
+    font-size: 1rem;
+}
+.btn-apple.btn-sm, .btn-apple-outline.btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+}
+
+
+/* Section Styling */
+.content-section-apple {
+    padding-top: 7.5rem;
+    padding-bottom: 7.5rem;
+    border-bottom: 1px solid var(--apple-border-color); /* Subtle separator */
+}
+.content-section-apple:last-of-type {
+    border-bottom: none;
+}
+
+.bg-dark-apple { background-color: var(--apple-dark-bg) !important; }
+.bg-black-apple { background-color: var(--apple-black-bg) !important; }
+.text-light-apple { color: var(--apple-light-text) !important; }
+.text-secondary-apple { color: var(--apple-secondary-text) !important; }
+
+.content-section-heading-apple h2 {
+    font-weight: 700;
+}
+.content-section-heading-apple h3 {
+    color: var(--apple-blue-accent); /* Accent for subheading */
+    font-weight: 500;
+}
+
+.rounded-apple {
+    border-radius: 18px; /* Apple's typical corner radius */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    overflow: hidden; /* Ensures images within don't break radius */
+}
+
+/* Skills Section - Icon Grid - UPDATED */
+.skill-item-apple {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--apple-card-bg);
+    padding: 0; /* Image fills the container */
+    border-radius: 24px; /* Larger radius for larger items */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    /* aspect-ratio: 16 / 9; /* Or 4/3, or remove if image aspect ratio should dictate */
+    /* Consider a min-height if images vary wildly in aspect ratio and you want some consistency */
+     min-height: 200px; /* Example: Adjust as needed */
+}
+
+.skill-item-apple:hover {
+    transform: translateY(-8px) scale(1.02); /* Slightly adjusted hover */
+    box-shadow: 0 12px 35px rgba(0,0,0,0.55);
+}
+
+.skill-item-apple img {
+    width: 100%;
+    height: 100%; /* This will try to fill the parent's height (defined by min-height or content) */
+    object-fit: cover; /* 'cover' is good if images are high-res and can be cropped.
+                           'contain' if you need to see the whole logo, but might leave whitespace.
+                           If your images are already perfectly sized for a large display,
+                           you might not even need height: 100% and object-fit if their natural
+                           dimensions work well. */
+    border-radius: 24px; /* Match parent's radius if object-fit: cover */
+    display: block; /* Remove any potential bottom space */
+}
+.skill-item-apple span {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--apple-light-text);
+}
+
+
+/* Portfolio & Project Cards */
+.card-apple {
+    background-color: var(--apple-card-bg);
+    border: 1px solid var(--apple-border-color);
+    border-radius: 18px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex; /* For equal height */
+    flex-direction: column; /* For equal height */
+    height: 100%; /* For equal height */
+}
+.card-apple:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.5);
+}
+
+.card-img-top-apple {
+    width: 100%;
+    height: 200px; /* Or use aspect-ratio */
+    object-fit: cover;
+    border-bottom: 1px solid var(--apple-border-color);
+}
+
+.card-body-apple {
+    padding: 1.5rem;
+    flex-grow: 1; /* For equal height */
+    display: flex; /* For equal height */
+    flex-direction: column; /* For equal height */
+}
+.card-title-apple {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+.card-text-apple {
+    color: var(--apple-secondary-text);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    flex-grow: 1; /* Push button to bottom */
+}
+.card-text-apple-small {
+    color: var(--apple-secondary-text);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+.card-body-apple .btn-apple-outline {
+    align-self: flex-start; /* Align button to the start */
+    margin-top: auto; /* Push button to bottom if text isn't filling space */
+}
+
+/* Highlights Section - Image Grid */
+.highlight-item-apple {
+    position: relative;
+    /* overflow: hidden; -- This is already on highlight-link-apple if needed, or can be here */
+}
+
+.highlight-item-apple .highlight-link-apple {
+    display: block;
+    position: relative;
+    text-decoration: none;
+    /* -- SET A FIXED HEIGHT -- */
+    height: 380px; /* Adjust this value as needed for lg screens and up */
+    overflow: hidden; /* Crucial to contain the image and its crop */
+    border-radius: 18px; /* Optional: if you want the highlight items themselves to be rounded */
+    background-color: var(--apple-card-bg); /* Optional: A fallback bg if images are slow to load */
+}
+
+.highlight-item-apple img {
+    transition: transform 0.5s ease;
+    display: block;
+    width: 100%;
+    /* -- MAKE IMAGE FILL THE FIXED HEIGHT CONTAINER -- */
+    height: 100%; 
+    object-fit: cover; /* This will cover the area, cropping if necessary */
+    /* border-radius: 18px; /* Match parent if you added radius to the link */
+}
+
+.highlight-item-apple:hover img {
+    transform: scale(1.05); 
+}
+
+.highlight-caption-apple {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem; /* Adjusted padding slightly */
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0) 100%); /* Stronger gradient */
+    color: #fff;
+    transition: opacity 0.3s ease;
+    z-index: 1; /* Ensure caption is above the image */
+}
+.highlight-caption-apple h2 {
+    font-size: 1.5rem; /* Slightly adjusted */
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.7); /* Text shadow for better readability */
+}
+.highlight-caption-apple p {
+    font-size: 0.9rem; /* Slightly adjusted */
+    font-weight: 300;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 0;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.7); /* Text shadow for better readability */
+}
+/* Optional: Make caption more visible on hover for highlights */
+/* .highlight-item-apple:hover .highlight-caption-apple {
+    opacity: 1;
+} */
+
+
+/* Footer */
+.footer-apple {
+    background-color: var(--apple-black-bg);
+    padding: 4rem 0;
+    color: var(--apple-secondary-text);
+}
+.footer-apple h3 {
+    color: var(--apple-light-text);
+    font-weight: 600;
+}
+.social-link-apple {
+    display: inline-flex; /* Use flex for centering icon */
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--apple-card-bg);
+    color: var(--apple-light-text);
+    border-radius: 50%;
+    font-size: 1.25rem;
+    margin: 0 0.5rem;
+    transition: all 0.3s ease;
+}
+.social-link-apple:hover, .social-link-apple:focus {
+    background-color: var(--apple-blue-accent);
+    color: #fff;
+    transform: translateY(-3px);
+}
+.text-muted-apple {
+    color: #6c757d !important; /* Bootstrap's muted, but for dark theme */
+}
+
+/* Scroll to Top Button (from stylish-portfolio, adapted) */
+.scroll-to-top-apple {
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
+    display: none; /* Hidden by default, JS shows it */
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    color: #fff;
+    background: rgba(44, 44, 46, 0.8); /* var(--apple-card-bg) with opacity */
+    line-height: 46px;
+    border-radius: 50%;
+    z-index: 1040; /* Above most things */
+    transition: background-color 0.3s ease;
+}
+.scroll-to-top-apple:focus, .scroll-to-top-apple:hover {
+    color: #fff;
+    background: var(--apple-blue-accent);
+}
+.scroll-to-top-apple:hover {
+    background: var(--apple-blue-accent);
+}
+.scroll-to-top-apple i {
+    font-weight: 800;
+}
+
+
+/* Sidebar (from stylish-portfolio, adapted) */
+#sidebar-wrapper {
+    position: fixed;
+    z-index: 1041; /* Above scroll-to-top */
+    right: 0;
+    width: 250px;
+    height: 100%;
+    transition: all .4s ease 0s;
+    transform: translateX(250px);
+    background: var(--apple-dark-bg); /* Darker background */
+    border-left: 1px solid var(--apple-border-color);
+}
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.sidebar-nav li.sidebar-brand {
+    font-size: 1.2rem;
+    height: auto;
+    line-height: normal;
+    padding: 1.5rem 1.25rem;
+    text-align: center;
+    color: var(--apple-light-text);
+    background: rgba(0,0,0,0.2);
+}
+.sidebar-nav li.sidebar-brand a {
+    color: var(--apple-light-text);
+    font-weight: 600;
+}
+.sidebar-nav li.sidebar-nav-item a {
+    display: block;
+    text-decoration: none;
+    color: var(--apple-secondary-text);
+    padding: 1rem 1.25rem;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.sidebar-nav li.sidebar-nav-item a:hover,
+.sidebar-nav li.sidebar-nav-item a:focus,
+.sidebar-nav li.sidebar-nav-item a.active {
+    color: var(--apple-blue-accent);
+    background: rgba(0, 122, 255, 0.1); /* Light blue accent bg */
+}
+#sidebar-wrapper.active {
+    right: 250px;
+    width: 250px;
+    transition: all .4s ease 0s;
+    transform: translateX(250px);
+}
+.menu-toggle { /* The hamburger icon */
+    position: fixed;
+    right: 15px;
+    top: 15px;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    color: #fff;
+    background: rgba(44, 44, 46, 0.8);
+    line-height: 50px;
+    z-index: 1042; /* Above sidebar */
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+.menu-toggle:focus, .menu-toggle:hover {
+    color: #fff;
+    background: var(--apple-blue-accent);
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+    .masthead-apple {
+        padding: 10rem 0;
+    }
+    .masthead-apple .masthead-content h1 {
+        font-size: 2.5rem;
+    }
+    .masthead-apple .masthead-content h3 {
+        font-size: 1.2rem;
+    }
+    .content-section-apple {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+    }
+    .skill-item-apple img {
+        max-width: 50px;
+        height: 50px;
+    }
+    .highlight-item-apple .highlight-link-apple {
+        height: 320px; /* Adjust as needed */
+    }
+    .highlight-caption-apple {
+        padding: 1.25rem;
+    }
+    .highlight-caption-apple h2 {
+        font-size: 1.35rem;
+    }
+    .highlight-caption-apple p {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .skill-item-apple {
+        padding: 1rem;
+    }
+     .skill-item-apple img {
+        max-width: 40px;
+        height: 40px;
+    }
+    .skill-item-apple span {
+        font-size: 0.8rem;
+    }
+    .card-title-apple {
+        font-size: 1.25rem;
+    }
+    .highlight-item-apple .highlight-link-apple {
+        height: 280px; /* Or you could use height: auto; if you prefer natural aspect ratio on mobile stack */
+                       /* If using auto, they won't be uniform when stacked unless images are same aspect */
+    }
+    .highlight-caption-apple {
+        padding: 1rem;
+    }
+     .highlight-caption-apple h2 {
+        font-size: 1.2rem;
+    }
+    .highlight-caption-apple p {
+        font-size: 0.8rem;
+    }
+}
+
+@media (min-width: 768px) { /* For md and up where it's 2 columns */
+    .skill-item-apple {
+        min-height: 250px; /* Example: Taller on larger screens */
+    }
+}
+
+@media (min-width: 992px) { /* For lg and up */
+    .skill-item-apple {
+        min-height: 300px; /* Example: Even taller */
+    }
+}
+
+/* Ensure the overall .container for the skills section isn't too constrained */
+#skills .container {
+    max-width: 1200px; /* Or whatever feels right for these larger items */
+}
+
+/* Parallax attempt for text in masthead - needs JS for better control */
+/*
+.masthead-content {
+    will-change: transform, opacity;
+}
+*/
