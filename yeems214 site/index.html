@@ -4,13 +4,23 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <meta name="description" content="I am Roel.">
-    <title>Roel Abarca - Innovator & Developer</title>
+    <meta name="description" content="I am Roel - Full Stack Developer, System Administrator, and Tech Innovator">
+    <title>Roel Abarca - Full Stack Developer</title>
     <meta property="og:site_name" content="yeems214" />
-    <meta property="og:title" content="Roel Abarca" />
-    <meta property="og:description" content="I am Roel. I am passionate about tech." />
-    <meta property="og:image" content="assets/img/resized_memoji2.png" />
+    <meta property="og:title" content="Roel Abarca - Full Stack Developer" />
+    <meta property="og:description" content="Full Stack Developer with expertise in modern web technologies, cloud infrastructure, and system administration" />
+    <meta property="og:image" content="assets/img/resized memoji2.png" />
     <link rel="icon" href="assets/img/photos-of-me/image0.png">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="assets/bootstrap/css/bootstrap.min.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style">
+    <link rel="preload" href="assets/css/apple-style.css" as="style">
+    
+    <!-- DNS prefetch for external domains -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//unpkg.com">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
     
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
@@ -18,11 +28,527 @@
     <link rel="stylesheet" href="assets/fonts/simple-line-icons.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="assets/css/videobanner.css"> <!-- Keep for video banner, might need adjustments -->
-    <link rel="stylesheet" href="assets/css/apple-style.css"> <!-- NEW CSS file for Apple-like styling -->
+    <link rel="stylesheet" href="assets/css/videobanner.css">
+    <link rel="stylesheet" href="assets/css/apple-style.css">
 
     <style>
-        /* Inline styles from original for quick reference, to be moved to apple-style.css or adjusted */
+        /* Critical CSS inlined for faster loading */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --tech-gradient: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4);
+            --code-bg: #1a1a1a;
+            --terminal-green: #00ff41;
+        }
+
+        /* Advanced animations and effects */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.5); }
+            50% { box-shadow: 0 0 30px rgba(102, 126, 234, 0.8); }
+        }
+
+        @keyframes matrix-rain {
+            0% { transform: translateY(-100%); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        @keyframes code-typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Professional header enhancements */
+        .masthead::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(0,0,0,0.7), rgba(0,0,0,0.4));
+            z-index: 1;
+        }
+
+        .masthead-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .tech-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            margin: 0.25rem;
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .tech-badge:nth-child(even) {
+            animation-delay: 1.5s;
+        }
+
+        /* Code block styling for professional touch */
+        .code-showcase {
+            background: #1d1f21;
+            border-radius: 12px;
+            padding: 0;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+            height: 160px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            border: 1px solid #3c3c3c;
+        }
+
+        .code-showcase::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 32px;
+            background: linear-gradient(to bottom, #404040, #2a2a2a);
+            border-radius: 12px 12px 0 0;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .code-showcase::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ff5f57;
+            box-shadow: 20px 0 0 #ffbd2e, 40px 0 0 #28ca42;
+            z-index: 2;
+        }
+
+        .terminal-text {
+            color: #00ff41;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Courier New', monospace;
+            font-size: 0.85rem;
+            margin-top: 40px;
+            padding: 0 20px 20px 20px;
+            line-height: 1.5;
+            height: calc(160px - 60px);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .terminal-line {
+            display: block;
+            margin: 0;
+            padding: 2px 0;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .terminal-prompt {
+            color: #5ac8fa;
+            font-weight: 500;
+        }
+
+        .terminal-command {
+            color: #ffffff;
+        }
+
+        .terminal-success {
+            color: #30d158;
+        }
+
+        .terminal-info {
+            color: #64d2ff;
+        }
+
+        .terminal-warning {
+            color: #ff9f0a;
+        }
+
+        .typing-animation {
+            border-right: 2px solid #00ff41;
+            animation: blink-caret 1s infinite;
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #00ff41; }
+        }
+
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        /* Enhanced skill grid - 5 columns instead of 2 */
+        .skill-grid-professional {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 1200px) {
+            .skill-grid-professional {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .skill-grid-professional {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .skill-grid-professional {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .skill-grid-professional {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+        }
+
+        /* Special AI & Data Science grid - larger images only */
+        .skill-grid-ai {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 1200px) {
+            .skill-grid-ai {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1.25rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .skill-grid-ai {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.25rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .skill-grid-ai {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .skill-grid-ai {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+        }
+
+        /* AI skill items - larger images, no text */
+        .skill-item-ai {
+            position: relative;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 0; /* Remove padding */
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden; /* Ensure images don't overflow rounded corners */
+        }
+
+        .skill-item-ai:hover {
+            transform: translateY(-10px) scale(1.05);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            animation: pulse-glow 2s infinite;
+        }
+
+        .skill-item-ai img {
+            width: 100%; /* Fill container width */
+            height: 100%; /* Fill container height */
+            object-fit: cover; /* Cover entire container while maintaining aspect ratio */
+            border-radius: 15px; /* Match container border radius */
+            transition: all 0.3s ease;
+        }
+
+        .skill-item-ai:hover img {
+            transform: scale(1.05);
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+        }
+
+        /* Mobile AI items */
+        @media (max-width: 767.98px) {
+            .skill-item-ai {
+                min-height: 80px;
+                padding: 0; /* Keep no padding on mobile */
+            }
+            
+            .skill-item-ai img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        /* Professional skill item styling - no labels, bigger images */
+        .skill-item-professional {
+            position: relative;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 0; /* Remove padding */
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden; /* Ensure images don't overflow rounded corners */
+        }
+
+        .skill-item-professional:hover {
+            transform: translateY(-10px) scale(1.05);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            animation: pulse-glow 2s infinite;
+        }
+
+        .skill-item-professional img {
+            width: 100%; /* Fill container width */
+            height: 100%; /* Fill container height */
+            object-fit: cover; /* Cover entire container while maintaining aspect ratio */
+            border-radius: 15px; /* Match container border radius */
+            transition: all 0.3s ease;
+        }
+
+        .skill-item-professional:hover img {
+            transform: scale(1.05);
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+        }
+
+        /* Mobile professional items */
+        @media (max-width: 767.98px) {
+            .skill-item-professional {
+                min-height: 80px;
+                padding: 0; /* Keep no padding on mobile */
+            }
+            
+            .skill-item-professional img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        /* Modal styling for technology descriptions */
+        .tech-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .tech-modal-content {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            color: white;
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tech-modal-close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            cursor: pointer;
+        }
+
+        .tech-modal-close:hover,
+        .tech-modal-close:focus {
+            color: white;
+            text-decoration: none;
+        }
+
+        .tech-modal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tech-modal-icon {
+            width: 60px;
+            height: 60px;
+            margin-right: 1rem;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem;
+        }
+
+        .tech-modal-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .tech-modal-description {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .tech-modal-features {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+        }
+
+        .tech-modal-features h4 {
+            margin-bottom: 0.5rem;
+            color: #4ECDC4;
+        }
+
+        .tech-modal-features ul {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+
+        /* Matrix effect background for tech sections */
+        .matrix-bg {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .matrix-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(90deg, transparent 98%, rgba(0, 255, 65, 0.1) 100%),
+                linear-gradient(180deg, transparent 98%, rgba(0, 255, 65, 0.1) 100%);
+            background-size: 20px 20px;
+            animation: matrix-rain 10s linear infinite;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        /* Professional section styling */
+        .section-professional {
+            position: relative;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease infinite;
+        }
+
+        /* Enhanced cards with glassmorphism */
+        .card-professional {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .card-professional:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Tech stack indicator */
+        .tech-stack-indicator {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 1rem 0.5rem;
+            display: none;
+        }
+
+        .tech-stack-indicator.show {
+            display: block;
+        }
+
+        .tech-indicator-item {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin: 0.5rem 0;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        /* Performance optimizations */
         ul.skills-list {
             list-style-type: none;
             padding-left: 0;
@@ -32,27 +558,123 @@
             text-decoration: none;
         }
 
+        /* Improved mobile responsiveness */
         @media (max-width: 575.98px) {
             .mt-xs-3 {
                 margin-top: 1rem !important;
             }
+            
+            .masthead h1 {
+                font-size: 2.5rem !important;
+            }
+            
+            .masthead h3 {
+                font-size: 1.1rem !important;
+            }
+            
+            .btn-xl {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .display-4 {
+                font-size: 2rem !important;
+            }
+
+            .tech-badge {
+                font-size: 0.75rem;
+                padding: 0.2rem 0.5rem;
+            }
         }
-        /* Ensure equal height works with new card styling */
-        .equal-height > .col > .card-apple { /* Adjusted selector */
+
+        /* Lazy loading placeholder */
+        .lazy-placeholder {
+            background: linear-gradient(90deg, #f0f0f0 25%, transparent 37%, #f0f0f0 63%);
+            background-size: 400% 100%;
+            animation: loading 1.4s ease infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 100% 50%; }
+            100% { background-position: -100% 50%; }
+        }
+
+        /* Optimized image containers */
+        .img-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .img-container img {
+            transition: opacity 0.3s;
+        }
+
+        .img-container img[loading="lazy"] {
+            opacity: 0;
+        }
+
+        .img-container img[loading="lazy"].loaded {
+            opacity: 1;
+        }
+
+        /* Equal height cards optimization */
+        .equal-height > .col > .card-apple {
             display: flex;
             flex-direction: column;
             height: 100%;
         }
-        .equal-height > .col > .card-apple > .card-body-apple { /* Adjusted selector */
+        .equal-height > .col > .card-apple > .card-body-apple {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
+
+        /* Video optimization for mobile */
+        @media (max-width: 768px) {
+            #bgVideo {
+                display: none;
+            }
+            .masthead {
+                background-image: url('assets/img/abarca dim.jpg');
+                background-size: cover;
+                background-position: center;
+            }
+        }
+
+        /* Professional highlighting effects */
+        .highlight-professional {
+            position: relative;
+            padding: 2rem;
+            margin: 2rem 0;
+            background: linear-gradient(45deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border-left: 4px solid var(--primary-gradient);
+            border-radius: 10px;
+        }
+
+        .stats-counter {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: var(--tech-gradient);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 3s ease infinite;
+        }
     </style>
 </head>
 
 <body id="page-top">
+    <!-- Tech Stack Indicator -->
+    <div class="tech-stack-indicator" id="techIndicator">
+        <div class="tech-indicator-item" title="Frontend">F</div>
+        <div class="tech-indicator-item" title="Backend">B</div>
+        <div class="tech-indicator-item" title="Database">D</div>
+        <div class="tech-indicator-item" title="DevOps">O</div>
+        <div class="tech-indicator-item" title="Mobile">M</div>
+    </div>
+
     <a class="menu-toggle rounded" href="#"><i class="fa fa-bars"></i></a>
     <nav class="navbar navbar-light navbar-expand deez" id="sidebar-wrapper">
         <div class="container">
@@ -66,7 +688,7 @@
                     <li class="nav-item sidebar-nav-item"><a class="nav-link js-scroll-trigger" href="#skills">Skills</a></li>
                     <li class="nav-item sidebar-nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a></li>
                     <li class="nav-item sidebar-nav-item"><a class="nav-link js-scroll-trigger" href="#highlights">Highlights</a></li>
-                    <li class="nav-item sidebar-nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact (Implicit Footer)</a></li>
+                    <li class="nav-item sidebar-nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -74,16 +696,26 @@
 
     <!-- Header -->
     <header class="d-flex masthead masthead-apple">
-        <video autoplay muted loop playsinline poster="assets/img/abarca_dim.jpg" id="bgVideo">
+        <video autoplay muted loop playsinline poster="assets/img/abarca dim.jpg" id="bgVideo" loading="lazy">
           <source src="assets/img/deez_dim.mp4" type="video/mp4">
         </video>
         <div class="container my-auto text-center text-white masthead-content">
           <h1 class="mb-3 display-3 fw-bold" data-aos="fade-up">Roel Abarca</h1>
-          <h3 class="mb-5 fw-light" data-aos="fade-up" data-aos-delay="200"><em>Full Stack Developer | Hobbyist Dev | SysAdmin | Photographer | Audiophile | Nerd</em></h3>
+          <h3 class="mb-4 fw-light" data-aos="fade-up" data-aos-delay="200"><em>Full Stack Developer | Cloud Architect | System Administrator</em></h3>
+          
+          <!-- Tech Stack Badges -->
+          <div class="mb-4" data-aos="fade-up" data-aos-delay="300">
+            <span class="tech-badge">React</span>
+            <span class="tech-badge">Spring Boot</span>
+            <span class="tech-badge">Docker</span>
+            <span class="tech-badge">AWS/GCP</span>
+            <span class="tech-badge">Linux</span>
+            <span class="tech-badge">Apple Silicon</span>
+          </div>
+          
           <div data-aos="fade-up" data-aos-delay="400">
             <a class="btn btn-apple btn-xl js-scroll-trigger me-2 mb-2" role="button" href="#about">Discover More</a>
             <a class="btn btn-apple-outline btn-xl js-scroll-trigger me-2 mb-2" role="button" href="https://yeems214.xyz/cv-video.html">Watch Video</a>
-            <!-- <a class="btn btn-apple-outline btn-xl js-scroll-trigger mb-2" role="button" href="https://gpupv.yeems214.xyz/">Enter Lair</a> -->
           </div>
         </div>
     </header>
@@ -93,13 +725,51 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 order-lg-last" data-aos="fade-left">
-                    <img src="assets/img/photos-of-me/psits.jpg?width=900&height=1200" alt="Portrait of Roel" class="img-fluid rounded-apple">
+                    <div class="img-container">
+                        <img src="assets/img/photos-of-me/psits.jpg" 
+                             alt="Portrait of Roel" 
+                             class="img-fluid rounded-apple"
+                             loading="lazy"
+                             width="900" 
+                             height="1200">
+                    </div>
                 </div>
                 <div class="col-lg-6 order-lg-first" data-aos="fade-right">
                     <div class="p-5 p-lg-0 pe-lg-5">
                         <h2 class="display-4 fw-bold mb-4">Hello, I'm Roel.</h2>
-                        <p class="lead mb-4">A tech enthusiast driven by a passion for creating and optimizing the digital world.</p>
-                        <p class="mb-4">My journey spans over 7 years in system administration, 10 years in virtualization, and 8 years in video and audio editing. With proficiency in System Administration and recent ventures into web development and software engineering, I bring a comprehensive skill set to the table.</p>
+                        <p class="lead mb-4">A full-stack developer and cloud architect passionate about creating scalable, efficient digital solutions.</p>
+                        
+                        <!-- Professional Statistics -->
+                        <div class="row text-center mb-4">
+                            <div class="col-4">
+                                <div class="stats-counter" data-target="7">0</div>
+                                <small>Years SysAdmin</small>
+                            </div>
+                            <div class="col-4">
+                                <div class="stats-counter" data-target="10">0</div>
+                                <small>Years Virtualization</small>
+                            </div>
+                            <div class="col-4">
+                                <div class="stats-counter" data-target="50">0</div>
+                                <small>Projects Completed</small>
+                            </div>
+                        </div>
+                        
+                        <p class="mb-4">Specializing in modern web technologies, cloud infrastructure, and cross-platform development. From Apple Silicon optimization to Windows Server deployment, I bring comprehensive expertise across all major platforms.</p>
+                        
+                        <!-- Code Showcase -->
+                        <div class="code-showcase" data-aos="zoom-in">
+                            <div class="terminal-text" id="terminalText">
+                                <div class="terminal-line"><span class="terminal-prompt">roel@duffins-macbook-pro</span><span class="terminal-command"> ~ % docker run -d --name portfolio \</span></div>
+                                <div class="terminal-line"><span class="terminal-command">  -p 80:80 -p 443:443 \</span></div>
+                                <div class="terminal-line"><span class="terminal-command">  yeems214/portfolio:latest</span></div>
+                                <div class="terminal-line"></div>
+                                <div class="terminal-line"><span class="terminal-success">✅ Full-stack deployment ready</span></div>
+                                <div class="terminal-line"><span class="terminal-info">🚀 Multi-platform optimization active</span></div>
+                                <div class="terminal-line"><span class="terminal-warning">🔧 Container running on all platforms</span></div>
+                            </div>
+                        </div>
+                        
                         <a class="btn btn-apple btn-lg js-scroll-trigger" role="button" href="#education">My Education</a>
                     </div>
                 </div>
@@ -108,24 +778,36 @@
     </section>
 
     <!-- Education Section -->
-    <section id="education" class="content-section-apple bg-black-apple text-light-apple">
+    <section id="education" class="content-section-apple section-professional text-light-apple matrix-bg">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6" data-aos="fade-right">
-                     <img src="assets/img/photos-of-me/IMG_1015web2.jpg?width=900&height=1200" alt="CSTHS Class Portrait Batch 2016" class="img-fluid rounded-apple">
+                    <div class="img-container">
+                        <img src="assets/img/photos-of-me/IMG_1015web2.jpg" 
+                             alt="CSTHS Class Portrait Batch 2016" 
+                             class="img-fluid rounded-apple"
+                             loading="lazy"
+                             width="900" 
+                             height="1200">
+                    </div>
                 </div>
                 <div class="col-lg-6" data-aos="fade-left">
                     <div class="p-5 p-lg-0 ps-lg-5">
                         <h2 class="display-4 fw-bold mb-4">Academic Journey</h2>
-                        <div class="mb-4">
-                            <h5 class="fw-semibold">College:</h5>
-                            <p class="lead-small">Bachelor of Science in Information Technology at<br />University of Cebu - Banilad Campus</p>
-                            <p class="lead-small">Applied Degree in Software Engineering at<br />Lithan eduCLaaS</p>
+                        
+                        <div class="highlight-professional mb-4">
+                            <h5 class="fw-semibold">🎓 College Education:</h5>
+                            <p class="lead-small mb-2">Bachelor of Science in Information Technology<br />University of Cebu - Banilad Campus</p>
+                            <p class="lead-small">Applied Degree in Software Engineering<br />Lithan eduCLaaS</p>
+                            <small class="text-muted">Focus: Full-Stack Development, Cloud Computing, System Design</small>
                         </div>
-                        <div>
-                            <h5 class="fw-semibold">Senior High School:</h5>
-                            <p class="lead-small">Science, Technology, Engineering and Mathematics (STEM) at<br />University of Cebu - Main Campus</p>
+                        
+                        <div class="highlight-professional">
+                            <h5 class="fw-semibold">🔬 Senior High School:</h5>
+                            <p class="lead-small">Science, Technology, Engineering and Mathematics (STEM)<br />University of Cebu - Main Campus</p>
+                            <small class="text-muted">Foundation in Computer Science, Mathematics, Physics</small>
                         </div>
+                        
                         <a class="btn btn-apple btn-lg js-scroll-trigger mt-4" role="button" href="#skills">Explore Skills</a>
                     </div>
                 </div>
@@ -133,104 +815,202 @@
         </div>
     </section>
 
-       <!-- Skills Section -->
+    <!-- Skills Section -->
     <section id="skills" class="content-section-apple bg-dark-apple text-light-apple text-center">
         <div class="container">
             <div class="content-section-heading-apple" data-aos="fade-up">
-                <h3 class="text-secondary-apple mb-1">Expertise</h3>
-                <h2 class="display-4 fw-bold mb-5">Core Competencies</h2>
+                <h3 class="text-secondary-apple mb-1">Technical Expertise</h3>
+                <h2 class="display-4 fw-bold mb-5">Full-Stack Competencies</h2>
             </div>
 
             <!-- Web Development -->
             <div data-aos="fade-up">
-                <h3 class="fw-semibold mb-4 mt-5">Web Development</h3>
-                <!-- SIGNIFICANTLY REDUCED COLUMNS FOR LARGER ITEMS -->
-                <div class="row gx-5 gy-5 row-cols-1 row-cols-md-2 justify-content-center skill-grid-apple">
-                    <div class="col skill-item-apple" data-aos="zoom-in" data-aos-delay="100"><img class="img-fluid" src="assets/img/skills/html.jpg" alt="HTML5" title="HTML5"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in" data-aos-delay="150"><img class="img-fluid" src="assets/img/skills/css.jpg" alt="CSS3" title="CSS3"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in" data-aos-delay="200"><img class="img-fluid" src="assets/img/skills/javascript.jpg" alt="JavaScript" title="JavaScript"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in" data-aos-delay="250"><img class="img-fluid" src="assets/img/skills/spring_mvc.jpg" alt="Spring MVC" title="Spring MVC"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in" data-aos-delay="300"><img class="img-fluid" src="assets/img/skills/spring_boot.jpg" alt="Spring Boot" title="Spring Boot"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in" data-aos-delay="350"><img class="img-fluid" src="assets/img/skills/mysql.jpg" alt="MySQL" title="MySQL"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in" data-aos-delay="400"><img class="img-fluid" src="assets/img/skills/reactjs.jpg" alt="ReactJS" title="ReactJS"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in" data-aos-delay="450"><img class="img-fluid" src="assets/img/skills/axure_rp.png" alt="Axure RP" title="Axure RP"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in" data-aos-delay="500"><img class="img-fluid" src="assets/img/skills/postgresql.png" alt="PostgreSQL" title="PostgreSQL"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in" data-aos-delay="550"><img class="img-fluid" src="assets/img/skills/ms-sql-server.png" alt="MS SQL Server" title="MS SQL Server"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in" data-aos-delay="550"><img class="img-fluid" src="assets/img/skills/mongodb.png" alt="MongoDB" title="MongoDB"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in" data-aos-delay="550"><img class="img-fluid" src="assets/img/skills/flask.png" alt="Flask" title="Flask"></div>
-
+                <h3 class="fw-semibold mb-4 mt-5">🌐 Web Development</h3>
+                <div class="skill-grid-professional">
+                    <div class="skill-item-professional" data-aos="zoom-in" data-aos-delay="100" data-tech="html5">
+                        <img src="assets/img/skills/html.jpg" alt="HTML5" title="HTML5" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-aos-delay="150" data-tech="css3">
+                        <img src="assets/img/skills/css.jpg" alt="CSS3" title="CSS3" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-aos-delay="200" data-tech="javascript">
+                        <img src="assets/img/skills/javascript.jpg" alt="JavaScript" title="JavaScript" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-aos-delay="250" data-tech="spring-mvc">
+                        <img src="assets/img/skills/spring_mvc.jpg" alt="Spring MVC" title="Spring MVC" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-aos-delay="300" data-tech="spring-boot">
+                        <img src="assets/img/skills/spring_boot.jpg" alt="Spring Boot" title="Spring Boot" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-aos-delay="350" data-tech="mysql">
+                        <img src="assets/img/skills/mysql.jpg" alt="MySQL" title="MySQL" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-aos-delay="400" data-tech="reactjs">
+                        <img src="assets/img/skills/reactjs.jpg" alt="ReactJS" title="ReactJS" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-aos-delay="450" data-tech="axure">
+                        <img src="assets/img/skills/axure_rp.png" alt="Axure RP" title="Axure RP" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-aos-delay="500" data-tech="postgresql">
+                        <img src="assets/img/skills/postgresql.png" alt="PostgreSQL" title="PostgreSQL" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-aos-delay="550" data-tech="sql-server">
+                        <img src="assets/img/skills/ms-sql-server.png" alt="MS SQL Server" title="MS SQL Server" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-aos-delay="600" data-tech="mongodb">
+                        <img src="assets/img/skills/mongodb.png" alt="MongoDB" title="MongoDB" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-aos-delay="650" data-tech="flask">
+                        <img src="assets/img/skills/flask.png" alt="Flask" title="Flask" loading="lazy">
+                    </div>
                 </div>
             </div>
             
             <!-- Software Development -->
             <div data-aos="fade-up" data-aos-delay="200">
-                <h3 class="fw-semibold mb-4 mt-5 pt-4">Software Development</h3>
-                 <div class="row gx-5 gy-5 row-cols-1 row-cols-md-2 justify-content-center skill-grid-apple">
-                    <div class="col skill-item-apple" data-aos="zoom-in" data-aos-delay="200"><img class="img-fluid" title="Python" src="assets/img/skills/python.png" alt="Python"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in" data-aos-delay="100"><img class="img-fluid" title="Java" src="assets/img/skills/java.jpg" alt="Java"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in" data-aos-delay="150"><img class="img-fluid" title="TypeScript" src="assets/img/skills/typescript.jpg" alt="TypeScript"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in" data-aos-delay="250"><img class="img-fluid" title="Swift" src="assets/img/skills/swift.png" alt="Swift"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in" data-aos-delay="300"><img class="img-fluid" title="React Native" src="assets/img/skills/react native.png" alt="React Native"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in" data-aos-delay="350"><img class="img-fluid" title="GitHub" src="assets/img/skills/github.jpg" alt="GitHub"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in" data-aos-delay="400"><img class="img-fluid" title="Bash" src="assets/img/skills/bash.png" alt="Bash"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in" data-aos-delay="450"><img class="img-fluid" title="Batch" src="assets/img/skills/batch.png" alt="Batch Scripting"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in" data-aos-delay="500"><img class="img-fluid" title="C" src="assets/img/skills/kotlin.png" alt="Kotlin"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in" data-aos-delay="550"><img class="img-fluid" title="C++" src="assets/img/skills/android.png" alt="Android"></div>
+                <h3 class="fw-semibold mb-4 mt-5 pt-4">💻 Software Development</h3>
+                <div class="skill-grid-professional">
+                    <div class="skill-item-professional" data-aos="zoom-in" data-aos-delay="100" data-tech="java">
+                        <img title="Java" src="assets/img/skills/java.jpg" alt="Java" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-aos-delay="150" data-tech="python">
+                        <img title="Python" src="assets/img/skills/python.png" alt="Python" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-aos-delay="200" data-tech="typescript">
+                        <img title="TypeScript" src="assets/img/skills/typescript.jpg" alt="TypeScript" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-aos-delay="250" data-tech="swift">
+                        <img title="Swift" src="assets/img/skills/swift.png" alt="Swift" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-aos-delay="300" data-tech="react-native">
+                        <img title="React Native" src="assets/img/skills/react native.png" alt="React Native" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-aos-delay="350" data-tech="github">
+                        <img title="GitHub" src="assets/img/skills/github.jpg" alt="GitHub" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-aos-delay="400" data-tech="bash">
+                        <img title="Bash" src="assets/img/skills/bash.png" alt="Bash" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-aos-delay="450" data-tech="batch">
+                        <img title="Batch" src="assets/img/skills/batch.png" alt="Batch Scripting" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-aos-delay="500" data-tech="kotlin">
+                        <img title="Kotlin" src="assets/img/skills/kotlin.png" alt="Kotlin" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-aos-delay="550" data-tech="android">
+                        <img title="Android" src="assets/img/skills/android.png" alt="Android" loading="lazy">
+                    </div>
                 </div>
             </div>
 
             <!-- System Administration -->
             <div data-aos="fade-up" data-aos-delay="300">
-                <h3 class="fw-semibold mb-4 mt-5 pt-4">System Administration</h3>
-                <div class="row gx-5 gy-5 row-cols-1 row-cols-md-2 justify-content-center skill-grid-apple">
-                    <div class="col skill-item-apple" data-aos="zoom-in"><img class="img-fluid" src="assets/img/skills/gcp.png" alt="Google Cloud Platform" title="Google Cloud Platform"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in"><img class="img-fluid" src="assets/img/skills/hyper-v.png" alt="Hyper-V" title="Hyper-V"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in"><img class="img-fluid" src="assets/img/skills/proxmox.png" alt="Proxmox" title="Proxmox VE"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in"><img class="img-fluid" src="assets/img/skills/windows_server.png" alt="Windows Server" title="Windows Server"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in"><img class="img-fluid" src="assets/img/skills/linux.png" alt="Linux" title="Linux"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in"><img class="img-fluid" src="assets/img/skills/docker.png" alt="Docker" title="Docker"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in"><img class="img-fluid" src="assets/img/skills/nginx.png" alt="Nginx" title="Nginx"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in"><img class="img-fluid" src="assets/img/skills/apache_http.png" alt="Apache HTTP Server" title="Apache HTTP Server"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in"><img class="img-fluid" src="assets/img/skills/pulseway.png" alt="Pulseway" title="Pulseway RMM"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in"><img class="img-fluid" src="assets/img/skills/apache_guacamole.png" alt="Apache Guacamole" title="Apache Guacamole"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in"><img class="img-fluid" src="assets/img/skills/portainer.png" alt="Portainer" title="Portainer"></div>
+                <h3 class="fw-semibold mb-4 mt-5 pt-4">⚙️ System Administration & DevOps</h3>
+                <div class="skill-grid-professional">
+                    <div class="skill-item-professional" data-aos="zoom-in" data-tech="gcp">
+                        <img src="assets/img/skills/gcp.png" alt="Google Cloud Platform" title="Google Cloud Platform" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-tech="hyper-v">
+                        <img src="assets/img/skills/hyper-v.png" alt="Hyper-V" title="Hyper-V" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-tech="proxmox">
+                        <img src="assets/img/skills/proxmox.png" alt="Proxmox" title="Proxmox VE" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-tech="windows-server">
+                        <img src="assets/img/skills/windows_server.png" alt="Windows Server" title="Windows Server" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-tech="linux">
+                        <img src="assets/img/skills/linux.png" alt="Linux" title="Linux" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-tech="docker">
+                        <img src="assets/img/skills/docker.png" alt="Docker" title="Docker" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-tech="nginx">
+                        <img src="assets/img/skills/nginx.png" alt="Nginx" title="Nginx" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-tech="apache">
+                        <img src="assets/img/skills/apache_http.png" alt="Apache HTTP Server" title="Apache HTTP Server" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-tech="pulseway">
+                        <img src="assets/img/skills/pulseway.png" alt="Pulseway" title="Pulseway RMM" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-tech="guacamole">
+                        <img src="assets/img/skills/apache_guacamole.png" alt="Apache Guacamole" title="Apache Guacamole" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-tech="portainer">
+                        <img src="assets/img/skills/portainer.png" alt="Portainer" title="Portainer" loading="lazy">
+                    </div>
                 </div>
             </div>
             
             <!-- Content Creation -->
             <div data-aos="fade-up" data-aos-delay="400">
-                <h3 class="fw-semibold mb-4 mt-5 pt-4">Content Creation</h3>
-                <div class="row gx-5 gy-5 row-cols-1 row-cols-md-2 justify-content-center skill-grid-apple">
-                    <div class="col skill-item-apple" data-aos="zoom-in"><img class="img-fluid" src="assets/img/skills/adobe_after_effects.png" alt="Adobe After Effects" title="Adobe After Effects"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in"><img class="img-fluid" src="assets/img/skills/adobe_audition.png" alt="Adobe Audition" title="Adobe Audition"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in"><img class="img-fluid" src="assets/img/skills/adobe_photoshop.png" alt="Adobe Photoshop" title="Adobe Photoshop"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in"><img class="img-fluid" src="assets/img/skills/adobe_premiere.png" alt="Adobe Premiere Pro" title="Adobe Premiere Pro"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in"><img class="img-fluid" src="assets/img/skills/final_cut_pro.png" alt="Final Cut Pro" title="Final Cut Pro"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in"><img class="img-fluid" src="assets/img/skills/sketchup.png" alt="SketchUp" title="SketchUp"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in"><img class="img-fluid" src="assets/img/skills/photography.png" alt="Photography" title="Photography"></div>
+                <h3 class="fw-semibold mb-4 mt-5 pt-4">🎨 Content Creation & Design</h3>
+                <div class="skill-grid-professional">
+                    <div class="skill-item-professional" data-aos="zoom-in" data-tech="after-effects">
+                        <img src="assets/img/skills/adobe_after_effects.png" alt="Adobe After Effects" title="Adobe After Effects" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-tech="audition">
+                        <img src="assets/img/skills/adobe_audition.png" alt="Adobe Audition" title="Adobe Audition" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-tech="photoshop">
+                        <img src="assets/img/skills/adobe_photoshop.png" alt="Adobe Photoshop" title="Adobe Photoshop" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-aos-delay="250" data-tech="premiere">
+                        <img src="assets/img/skills/adobe_premiere.png" alt="Adobe Premiere Pro" title="Adobe Premiere Pro" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-tech="final-cut">
+                        <img src="assets/img/skills/final_cut_pro.png" alt="Final Cut Pro" title="Final Cut Pro" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-tech="sketchup">
+                        <img src="assets/img/skills/sketchup.png" alt="SketchUp" title="SketchUp" loading="lazy">
+                    </div>
+                    <div class="skill-item-professional" data-aos="zoom-in" data-tech="photography">
+                        <img src="assets/img/skills/photography.png" alt="Photography" title="Photography" loading="lazy">
+                    </div>
                 </div>
             </div>
 
             <!-- AI and Data Science -->
             <div data-aos="fade-up" data-aos-delay="500">
-                <h3 class="fw-semibold mb-4 mt-5 pt-4">Artificial Intelligence & Data Science</h3>
-                 <div class="row gx-5 gy-5 row-cols-1 row-cols-md-2 justify-content-center skill-grid-apple">
-                    <div class="col skill-item-apple" data-aos="zoom-in"><img class="img-fluid" src="assets/img/skills/aistudio.png" alt="Google AI Studio" title="Google AI Studio"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in"><img class="img-fluid" src="assets/img/skills/gemini.png" alt="Gemini" title="Gemini"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in"><img class="img-fluid" src="assets/img/skills/openai.png" alt="OpenAI" title="OpenAI"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in"><img class="img-fluid" src="assets/img/skills/groq.png" alt="Groq" title="Groq"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in"><img class="img-fluid" src="assets/img/skills/vertex_ai.png" alt="Vertex AI" title="Vertex AI"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in"><img class="img-fluid" src="assets/img/skills/ollama.png" alt="Ollama" title="Ollama"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in"><img class="img-fluid" src="assets/img/skills/stable_diffusion.png" alt="Stable Diffusion" title="Stable Diffusion"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in"><img class="img-fluid" src="assets/img/skills/looker_studio.png" alt="Looker Studio" title="Looker Studio"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in"><img class="img-fluid" src="assets/img/skills/power_bi.png" alt="Microsoft Power BI" title="Microsoft Power BI"></div>
-                    <div class="col skill-item-apple" data-aos="zoom-in"><img class="img-fluid" src="assets/img/skills/jupyter.png" alt="JupyterLab" title="JupyterLab"></div>
+                <h3 class="fw-semibold mb-4 mt-5 pt-4">🤖 AI & Data Science</h3>
+                <div class="skill-grid-ai">
+                    <div class="skill-item-ai" data-aos="zoom-in" data-tech="ai-studio">
+                        <img src="assets/img/skills/aistudio.png" alt="Google AI Studio" title="Google AI Studio" loading="lazy">
+                    </div>
+                    <div class="skill-item-ai" data-aos="zoom-in" data-tech="gemini">
+                        <img src="assets/img/skills/gemini.png" alt="Gemini" title="Gemini" loading="lazy">
+                    </div>
+                    <div class="skill-item-ai" data-aos="zoom-in" data-tech="openai">
+                        <img src="assets/img/skills/openai.png" alt="OpenAI" title="OpenAI" loading="lazy">
+                    </div>
+                    <div class="skill-item-ai" data-aos="zoom-in" data-tech="groq">
+                        <img src="assets/img/skills/groq.png" alt="Groq" title="Groq" loading="lazy">
+                    </div>
+                    <div class="skill-item-ai" data-aos="zoom-in" data-tech="vertex-ai">
+                        <img src="assets/img/skills/vertex_ai.png" alt="Vertex AI" title="Vertex AI" loading="lazy">
+                    </div>
+                    <div class="skill-item-ai" data-aos="zoom-in" data-tech="ollama">
+                        <img src="assets/img/skills/ollama.png" alt="Ollama" title="Ollama" loading="lazy">
+                    </div>
+                    <div class="skill-item-ai" data-aos="zoom-in" data-tech="stable-diffusion">
+                        <img src="assets/img/skills/stable_diffusion.png" alt="Stable Diffusion" title="Stable Diffusion" loading="lazy">
+                    </div>
+                    <div class="skill-item-ai" data-aos="zoom-in" data-tech="looker">
+                        <img src="assets/img/skills/looker_studio.png" alt="Looker Studio" title="Looker Studio" loading="lazy">
+                    </div>
+                    <div class="skill-item-ai" data-aos="zoom-in" data-tech="power-bi">
+                        <img src="assets/img/skills/power_bi.png" alt="Microsoft Power BI" title="Microsoft Power BI" loading="lazy">
+                    </div>
+                    <div class="skill-item-ai" data-aos="zoom-in" data-tech="jupyter">
+                        <img src="assets/img/skills/jupyter.png" alt="JupyterLab" title="JupyterLab" loading="lazy">
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-        <!-- Portfolio Section -->
+    <!-- Portfolio Section -->
     <section id="portfolio" class="content-section-apple bg-black-apple text-light-apple">
         <div class="container py-4 py-xl-5">
             <div class="content-section-heading-apple text-center" data-aos="fade-up">
@@ -241,7 +1021,7 @@
                 <!-- Project Item: Duffin's Image Drops (Mobile App) -->
                 <div class="col" data-aos="fade-up" data-aos-delay="100">
                     <div class="card-apple">
-                        <img class="card-img-top-apple" src="assets/img/projects/sharex-mobile2.png" alt="Duffin's Image Drops Mobile App">
+                        <img class="card-img-top-apple" src="assets/img/projects/sharex-mobile2.png" alt="Duffin's Image Drops Mobile App" loading="lazy">
                         <div class="card-body-apple">
                             <h4 class="card-title-apple">Duffin's Image Drops (Mobile)</h4>
                             <p class="card-text-apple-small"><b>Tech:</b> JavaScript, React Native, Spring Boot, REST API</p>
@@ -256,7 +1036,7 @@
                 <!-- Project Item: Diana AI -->
                 <div class="col" data-aos="fade-up" data-aos-delay="200">
                     <div class="card-apple">
-                        <img class="card-img-top-apple" src="assets/img/projects/diana.png" alt="Diana AI Chatbot">
+                        <img class="card-img-top-apple" src="assets/img/projects/diana.png" alt="Diana AI Chatbot" loading="lazy">
                         <div class="card-body-apple">
                             <h4 class="card-title-apple">Diana AI</h4>
                             <p class="card-text-apple-small"><b>Tech:</b> Python, Google AI Studio, Gemini 1.0 Pro</p>
@@ -271,7 +1051,7 @@
                 <!-- Project Item: Duffin's Music Player -->
                 <div class="col" data-aos="fade-up" data-aos-delay="300">
                      <div class="card-apple">
-                        <img class="card-img-top-apple" src="assets/img/projects/duffinmusicplayer2.png" alt="Duffin's Music Player">
+                        <img class="card-img-top-apple" src="assets/img/projects/duffinmusicplayer2.png" alt="Duffin's Music Player" loading="lazy">
                         <div class="card-body-apple">
                             <h4 class="card-title-apple">Duffin's Music Player</h4>
                             <p class="card-text-apple-small"><b>Tech:</b> Java, Maven, SQLite, Python, FFmpeg</p>
@@ -286,7 +1066,7 @@
                 <!-- Project Item: ShareX Image Server -->
                 <div class="col" data-aos="fade-up" data-aos-delay="100">
                     <div class="card-apple">
-                       <img class="card-img-top-apple" src="assets/img/projects/sharex2.png" alt="ShareX Image Server">
+                       <img class="card-img-top-apple" src="assets/img/projects/sharex2.png" alt="ShareX Image Server" loading="lazy">
                        <div class="card-body-apple">
                            <h4 class="card-title-apple">ShareX Image Server</h4>
                            <p class="card-text-apple-small"><b>Tech:</b> JSP, Spring Boot, MySQL, REST API</p>
@@ -300,7 +1080,7 @@
                 <!-- Project Item: Meals on Wheels -->
                <div class="col" data-aos="fade-up" data-aos-delay="200">
                     <div class="card-apple">
-                       <img class="card-img-top-apple" src="assets/img/projects/mow.png" alt="Meals on Wheels Project">
+                       <img class="card-img-top-apple" src="assets/img/projects/mow.png" alt="Meals on Wheels Project" loading="lazy">
                        <div class="card-body-apple">
                            <h4 class="card-title-apple">Meals on Wheels</h4>
                            <p class="card-text-apple-small"><b>Tech:</b> JSP, CSS, Spring Boot, MySQL</p>
@@ -314,7 +1094,7 @@
                 <!-- Project Item: Know Your Neighborhood -->
                <div class="col" data-aos="fade-up" data-aos-delay="300">
                     <div class="card-apple">
-                       <img class="card-img-top-apple" src="assets/img/projects/api1.png" alt="Know Your Neighborhood Project">
+                       <img class="card-img-top-apple" src="assets/img/projects/api1.png" alt="Know Your Neighborhood Project" loading="lazy">
                        <div class="card-body-apple">
                            <h4 class="card-title-apple">Know Your Neighborhood</h4>
                            <p class="card-text-apple-small"><b>Tech:</b> ReactJS, CSS, Spring Boot, MySQL</p>
@@ -328,7 +1108,7 @@
                 <!-- Project Item: ABC Cars -->
                 <div class="col" data-aos="fade-up" data-aos-delay="100">
                     <div class="card-apple">
-                       <img class="card-img-top-apple" src="assets/img/projects/abc-cars.png" alt="ABC Cars Project">
+                       <img class="card-img-top-apple" src="assets/img/projects/abc-cars.png" alt="ABC Cars Project" loading="lazy">
                        <div class="card-body-apple">
                            <h4 class="card-title-apple">ABC Cars</h4>
                            <p class="card-text-apple-small"><b>Tech:</b> JSP, CSS, Spring Boot, MySQL</p>
@@ -342,15 +1122,12 @@
                 <!-- Project Item: Server Hosting: yeems214.xyz -->
                 <div class="col" data-aos="fade-up" data-aos-delay="200">
                     <div class="card-apple">
-                       <img class="card-img-top-apple" src="assets/img/projects/self-hosted.png" alt="Self-hosted Server yeems214.xyz">
+                       <img class="card-img-top-apple" src="assets/img/projects/self-hosted.png" alt="Self-hosted Server yeems214.xyz" loading="lazy">
                        <div class="card-body-apple">
                            <h4 class="card-title-apple">Server Hosting: yeems214.xyz</h4>
                            <p class="card-text-apple-small"><b>Tech:</b> Windows, Cloudflare Argo, Docker, Nginx</p>
                            <p class="card-text-apple-small"><b>Date:</b> March 2023</p>
-                           <!-- The original description for this item was a copy of ABC Cars, I'll make a generic one. Please update it! -->
                            <p class="card-text-apple">Personal server hosting setup for various web applications and services, utilizing virtualization and containerization technologies.</p>
-                           <!-- You might want to link to your site or a relevant GitHub repo if applicable -->
-                           <!-- <a class="btn btn-apple-outline btn-sm mt-auto" href="https://yeems214.xyz">Visit Site</a> -->
                            <a class="btn btn-apple-outline btn-sm mt-auto" href="https://github.com/pointlessduffin-21">Explore My GitHub</a> 
                        </div>
                    </div>
@@ -359,7 +1136,7 @@
                 <!-- Project Item: ABC Jobs -->
                 <div class="col" data-aos="fade-up" data-aos-delay="300">
                     <div class="card-apple">
-                       <img class="card-img-top-apple" src="assets/img/projects/wdf.png" alt="ABC Jobs Project">
+                       <img class="card-img-top-apple" src="assets/img/projects/wdf.png" alt="ABC Jobs Project" loading="lazy">
                        <div class="card-body-apple">
                            <h4 class="card-title-apple">ABC Jobs</h4>
                            <p class="card-text-apple-small"><b>Tech:</b> JSP, CSS, Spring MVC, MySQL</p>
@@ -373,7 +1150,7 @@
                 <!-- Project Item: Simple Multiple-Choice Exam -->
                 <div class="col" data-aos="fade-up" data-aos-delay="100">
                     <div class="card-apple">
-                       <img class="card-img-top-apple" src="assets/img/projects/pfs-mcq.png" alt="Multiple-Choice Exam Project">
+                       <img class="card-img-top-apple" src="assets/img/projects/pfs-mcq.png" alt="Multiple-Choice Exam Project" loading="lazy">
                        <div class="card-body-apple">
                            <h4 class="card-title-apple">Simple MCQ with CSV Support</h4>
                            <p class="card-text-apple-small"><b>Tech:</b> Java</p>
@@ -388,13 +1165,13 @@
                 <!-- Project Item: ABC Learning Center -->
                 <div class="col" data-aos="fade-up" data-aos-delay="200">
                     <div class="card-apple">
-                       <img class="card-img-top-apple" src="assets/img/projects/fed-front1.png" alt="ABC Learning Center Website">
+                       <img class="card-img-top-apple" src="assets/img/projects/fed-front1.png" alt="ABC Learning Center Website" loading="lazy">
                        <div class="card-body-apple">
                            <h4 class="card-title-apple">ABC Learning Center</h4>
                            <p class="card-text-apple-small"><b>Tech:</b> HTML, CSS, JavaScript, Apache HTTP</p>
                            <p class="card-text-apple-small"><b>Date:</b> September 2022</p>
                            <p class="card-text-apple">An early Lithan eduCLaaS front-end project showcasing HTML, CSS, and JavaScript skills with animations and modern design.</p>
-                           <div class="mt-auto"> <!-- Wrapper for multiple buttons -->
+                           <div class="mt-auto">
                                <a class="btn btn-apple-outline btn-sm me-2" href="https://abc-github-io.vercel.app/">Visit Webpage</a>
                                <a class="btn btn-apple-outline btn-sm" href="https://github.com/pointlessduffin-21/abc.github.io">View on GitHub</a>
                            </div>
@@ -405,13 +1182,13 @@
                 <!-- Project Item: My Condo Setup -->
                 <div class="col" data-aos="fade-up" data-aos-delay="300">
                     <div class="card-apple">
-                       <img class="card-img-top-apple" src="assets/img/projects/condo.png" alt="Condo Setup Interior Design">
+                       <img class="card-img-top-apple" src="assets/img/projects/condo.png" alt="Condo Setup Interior Design" loading="lazy">
                        <div class="card-body-apple">
                            <h4 class="card-title-apple">My Condo Setup (Interior Design)</h4>
                            <p class="card-text-apple-small"><b>Tech:</b> SketchUp, V-Ray</p>
                            <p class="card-text-apple-small"><b>Date:</b> January 2022</p>
                            <p class="card-text-apple">A personal interior design concept for a college setup, created using SketchUp and V-Ray during an internet outage post-typhoon.</p>
-                           <a class="btn btn-apple-outline btn-sm mt-auto" href="https://github.com/pointlessduffin-21/EQDS">View on GitHub</a> <!-- Note: Link is to EQDS, update if incorrect -->
+                           <a class="btn btn-apple-outline btn-sm mt-auto" href="https://github.com/pointlessduffin-21/EQDS">View on GitHub</a>
                        </div>
                    </div>
                 </div>
@@ -419,7 +1196,7 @@
                 <!-- Project Item: Arduino Earthquake Sensor -->
                 <div class="col" data-aos="fade-up" data-aos-delay="100">
                     <div class="card-apple">
-                       <img class="card-img-top-apple" src="assets/img/highlights/maxresdefault.png" alt="Arduino Earthquake Detection Sensor"> <!-- Image from highlights, assuming it's correct -->
+                       <img class="card-img-top-apple" src="assets/img/highlights/maxresdefault.png" alt="Arduino Earthquake Detection Sensor" loading="lazy">
                        <div class="card-body-apple">
                            <h4 class="card-title-apple">Arduino Earthquake Sensor</h4>
                            <p class="card-text-apple-small"><b>Tech:</b> C, Arduino</p>
@@ -442,47 +1219,42 @@
                 <h2 class="display-4 fw-bold mb-5">Career Highlights</h2>
             </div>
             <div class="row g-0">
-                <!-- Highlight Item -->
                 <div class="col-lg-6 highlight-item-apple" data-aos="zoom-in-up">
                     <a href="https://web.facebook.com/share/p/GKD5BEFeAp8RFYvX/" target="_blank" rel="noopener noreferrer" class="highlight-link-apple">
-                        <img class="img-fluid" src="assets/img/highlights/atty-go.png?width=700&height=467" alt="Meeting Atty. Go">
+                        <img class="img-fluid" src="assets/img/highlights/atty-go.png" alt="Meeting Atty. Go" loading="lazy" width="700" height="467">
                         <div class="highlight-caption-apple">
                             <h2>Milestones</h2>
                             <p>UC-B x eduCLaaS: Meeting Atty. Go</p>
                         </div>
                     </a>
                 </div>
-                <!-- Highlight Item -->
                 <div class="col-lg-6 highlight-item-apple" data-aos="zoom-in-up" data-aos-delay="100">
                     <a href="https://www.facebook.com/share/v/sBykztu5b9at9bcv/" target="_blank" rel="noopener noreferrer" class="highlight-link-apple">
-                        <img class="img-fluid" src="assets/img/highlights/io extended.png?width=700&height=467" alt="Google I/O Extended Cebu">
+                        <img class="img-fluid" src="assets/img/highlights/io%20extended.png" alt="Google I/O Extended Cebu" loading="lazy" width="700" height="467">
                         <div class="highlight-caption-apple">
                             <h2>Recent Events</h2>
                             <p>Google I/O Extended Cebu 2024</p>
                         </div>
                     </a>
                 </div>
-                 <!-- Highlight Item -->
                 <div class="col-lg-6 highlight-item-apple" data-aos="zoom-in-up" data-aos-delay="200">
                     <a href="https://www.facebook.com/icpepctudanao" target="_blank" rel="noopener noreferrer" class="highlight-link-apple">
-                        <img class="img-fluid" src="assets/img/highlights/rap.png?width=700&height=467" alt="Cubeworks x CTU">
+                        <img class="img-fluid" src="assets/img/highlights/rap.png" alt="Cubeworks x CTU" loading="lazy" width="700" height="467">
                         <div class="highlight-caption-apple">
                             <h2>Endeavours</h2>
                             <p>Cubeworks x CTU: AI + IoT Showcase</p>
                         </div>
                     </a>
                 </div>
-                <!-- Highlight Item -->
                 <div class="col-lg-6 highlight-item-apple" data-aos="zoom-in-up" data-aos-delay="300">
                      <a href="https://fb.watch/r9QYINmWmB/" target="_blank" rel="noopener noreferrer" class="highlight-link-apple">
-                        <img class="img-fluid" src="assets/img/highlights/devfest.png?width=700&height=467" alt="Google DevFest Cebu">
+                        <img class="img-fluid" src="assets/img/highlights/devfest.png" alt="Google DevFest Cebu" loading="lazy" width="700" height="467">
                         <div class="highlight-caption-apple">
                             <h2>Recent Events</h2>
                             <p>Google DevFest Cebu 2023</p>
                         </div>
                     </a>
                 </div>
-                <!-- ... Add other highlight items similarly ... -->
             </div>
         </div>
     </section>
@@ -504,28 +1276,575 @@
         <a class="js-scroll-trigger scroll-to-top-apple rounded" href="#page-top"><i class="fa fa-angle-up"></i></a>
     </footer>
 
-    <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script> <!-- Use bundle for Popper -->
-    <script src="assets/js/stylish-portfolio.js"></script> <!-- Keep for sidebar and smooth scroll -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Technology Modal -->
+    <div id="techModal" class="tech-modal">
+        <div class="tech-modal-content">
+            <span class="tech-modal-close">&times;</span>
+            <div class="tech-modal-header">
+                <img id="modalIcon" class="tech-modal-icon" src="" alt="">
+                <h2 id="modalTitle" class="tech-modal-title"></h2>
+            </div>
+            <div id="modalDescription" class="tech-modal-description"></div>
+            <div id="modalFeatures" class="tech-modal-features">
+                <h4>Key Features & Use Cases:</h4>
+                <ul id="modalFeatureList"></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optimized JS loading -->
+    <script src="assets/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+    <script src="assets/js/stylish-portfolio.js" defer></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+    
     <script>
-        AOS.init({
-            duration: 800, // values from 0 to 3000, with step 50ms
-            once: true, // whether animation should happen only once - while scrolling down
+        // Optimized loading script with professional enhancements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS
+            AOS.init({
+                duration: 800,
+                once: true,
+                disable: function() {
+                    // Only disable on very small screens or slow connections
+                    var maxWidth = 480;
+                    var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+                    return window.innerWidth < maxWidth || (connection && connection.effectiveType === 'slow-2g');
+                }
+            });
+
+            // Update copyright year
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            // Professional counter animation
+            function animateCounters() {
+                const counters = document.querySelectorAll('.stats-counter');
+                counters.forEach(counter => {
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    const increment = target / 100;
+                    let current = 0;
+                    
+                    const updateCounter = () => {
+                        if (current < target) {
+                            current += increment;
+                            counter.textContent = Math.ceil(current);
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.textContent = target;
+                        }
+                    };
+                    
+                    // Start animation when element is in view
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                updateCounter();
+                                observer.unobserve(entry.target);
+                            }
+                        });
+                    });
+                    observer.observe(counter);
+                });
+            }
+
+            // Tech stack indicator functionality
+            function initTechStackIndicator() {
+                const indicator = document.getElementById('techIndicator');
+                const sections = {
+                    'skills': ['F', 'B', 'D'], // Frontend, Backend, Database
+                    'portfolio': ['M'], // Mobile
+                    'education': ['O'] // DevOps/Operations
+                };
+
+                window.addEventListener('scroll', () => {
+                    const scrolled = window.scrollY;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (scrolled > windowHeight / 2) {
+                        indicator.classList.add('show');
+                    } else {
+                        indicator.classList.remove('show');
+                    }
+                });
+            }
+
+            // Enhanced lazy loading with progressive enhancement
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            
+                            // Add loading animation
+                            img.style.transition = 'opacity 0.5s ease-in-out';
+                            img.style.opacity = '0';
+                            
+                            // Load image
+                            const tempImg = new Image();
+                            tempImg.onload = () => {
+                                img.style.opacity = '1';
+                                img.classList.add('loaded');
+                            };
+                            tempImg.src = img.src;
+                            
+                            observer.unobserve(img);
+                        }
+                    });
+                }, {
+                    rootMargin: '50px'
+                });
+
+                document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+                    imageObserver.observe(img);
+                });
+            }
+
+            // Professional skill hover effects
+            function initSkillInteractions() {
+                const skillItems = document.querySelectorAll('.skill-item-professional');
+                
+                skillItems.forEach(item => {
+                    item.addEventListener('mouseenter', function() {
+                        // Add subtle glow effect
+                        this.style.transform = 'translateY(-10px) scale(1.05)';
+                        
+                        // Create ripple effect
+                        const ripple = document.createElement('div');
+                        ripple.style.cssText = `
+                            position: absolute;
+                            border-radius: 50%;
+                            background: rgba(102, 126, 234, 0.3);
+                            width: 10px;
+                            height: 10px;
+                            left: 50%;
+                            top: 50%;
+                            transform: translate(-50%, -50%) scale(0);
+                            animation: ripple 0.6s linear;
+                            pointer-events: none;
+                            z-index: 1;
+                        `;
+                        
+                        this.appendChild(ripple);
+                        
+                        setTimeout(() => {
+                            if (ripple.parentNode) {
+                                ripple.parentNode.removeChild(ripple);
+                            }
+                        }, 600);
+                    });
+                    
+                    item.addEventListener('mouseleave', function() {
+                        this.style.transform = '';
+                    });
+                });
+            }
+
+            // Connection-aware loading with enhanced optimization
+            if ('connection' in navigator) {
+                const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+                if (connection) {
+                    const body = document.body;
+                    
+                    // Add connection-specific classes
+                    body.classList.add(`connection-${connection.effectiveType}`);
+                    
+                    // Optimize based on connection
+                    if (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
+                        body.classList.add('low-bandwidth');
+                        
+                        // Disable video on very slow connections
+                        const video = document.getElementById('bgVideo');
+                        if (video) {
+                            video.style.display = 'none';
+                            video.pause();
+                        }
+                        
+                        // Reduce animation complexity
+                        const style = document.createElement('style');
+                        style.textContent = `
+                            .skill-item-professional:hover {
+                                transform: translateY(-5px) scale(1.02) !important;
+                            }
+                            .tech-badge { animation: none !important; }
+                        `;
+                        document.head.appendChild(style);
+                    }
+                }
+            }
+
+            // Advanced preloading strategy
+            function intelligentPreload() {
+                let preloadTriggered = false;
+                
+                const preloadHandler = throttle(() => {
+                    if (!preloadTriggered && window.scrollY > 300) {
+                        preloadTriggered = true;
+                        
+                        // Preload critical images in next sections
+                        const criticalImages = [
+                            'assets/img/projects/diana.png',
+                            'assets/img/highlights/atty-go.png',
+                            'assets/img/skills/reactjs.jpg',
+                            'assets/img/skills/spring_boot.jpg'
+                        ];
+                        
+                        criticalImages.forEach(src => {
+                            const link = document.createElement('link');
+                            link.rel = 'preload';
+                            link.as = 'image';
+                            link.href = src;
+                            document.head.appendChild(link);
+                        });
+                    }
+                }, 250);
+                
+                window.addEventListener('scroll', preloadHandler, { passive: true });
+            }
+
+            // Throttle function for performance
+            function throttle(func, wait) {
+                let timeout;
+                return function executedFunction(...args) {
+                    const later = () => {
+                        clearTimeout(timeout);
+                        func(...args);
+                    };
+                    clearTimeout(timeout);
+                    timeout = setTimeout(later, wait);
+                };
+            }
+
+            // Initialize all enhancements
+            animateCounters();
+            initTechStackIndicator();
+            initSkillInteractions();
+            intelligentPreload();
+            initTechModal();
+            initTerminalAnimation();
+
+            // Terminal typing animation
+            function initTerminalAnimation() {
+                const terminalText = document.getElementById('terminalText');
+                if (!terminalText) return;
+
+                const lines = [
+                    { text: 'roel@macbook-pro', class: 'terminal-prompt', suffix: ' ~ % docker run -d --name portfolio \\', suffixClass: 'terminal-command' },
+                    { text: '  -p 80:80 -p 443:443 \\', class: 'terminal-command' },
+                    { text: '  yeems214/portfolio:latest', class: 'terminal-command' },
+                    { text: '', class: '' },
+                    { text: '✅ Full-stack deployment ready', class: 'terminal-success' },
+                    { text: '🚀 Multi-platform optimization active', class: 'terminal-info' },
+                    { text: '🔧 Container running on all platforms', class: 'terminal-warning' }
+                ];
+
+                let currentLine = 0;
+                let currentChar = 0;
+                let isTyping = false;
+
+                function startAnimation() {
+                    if (isTyping) return;
+                    isTyping = true;
+                    
+                    // Clear terminal
+                    terminalText.innerHTML = '';
+                    currentLine = 0;
+                    currentChar = 0;
+                    
+                    typeNextLine();
+                }
+
+                function typeNextLine() {
+                    if (currentLine >= lines.length) {
+                        isTyping = false;
+                        // Restart animation after 3 seconds
+                        setTimeout(startAnimation, 3000);
+                        return;
+                    }
+
+                    const line = lines[currentLine];
+                    const lineElement = document.createElement('div');
+                    lineElement.className = 'terminal-line';
+                    terminalText.appendChild(lineElement);
+
+                    if (line.text === '') {
+                        // Empty line, move to next immediately
+                        currentLine++;
+                        setTimeout(typeNextLine, 200);
+                        return;
+                    }
+
+                    currentChar = 0;
+                    
+                    function typeChar() {
+                        if (currentChar < line.text.length) {
+                            const span = document.createElement('span');
+                            span.className = line.class;
+                            span.textContent = line.text.substring(0, currentChar + 1);
+                            
+                            if (line.suffix && currentChar === line.text.length - 1) {
+                                const suffixSpan = document.createElement('span');
+                                suffixSpan.className = line.suffixClass || '';
+                                suffixSpan.textContent = line.suffix;
+                                span.appendChild(suffixSpan);
+                            }
+                            
+                            // Add typing cursor
+                            const cursor = document.createElement('span');
+                            cursor.className = 'typing-animation';
+                            cursor.innerHTML = '&nbsp;';
+                            
+                            lineElement.innerHTML = '';
+                            lineElement.appendChild(span);
+                            lineElement.appendChild(cursor);
+                            
+                            currentChar++;
+                            
+                            // Variable typing speed for realism
+                            const typingSpeed = Math.random() * 100 + 50;
+                            setTimeout(typeChar, typingSpeed);
+                        } else {
+                            // Remove cursor and move to next line
+                            const cursor = lineElement.querySelector('.typing-animation');
+                            if (cursor) cursor.remove();
+                            
+                            currentLine++;
+                            setTimeout(typeNextLine, 500);
+                        }
+                    }
+
+                    typeChar();
+                }
+
+                // Start animation when code showcase comes into view
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && !isTyping) {
+                            setTimeout(startAnimation, 500);
+                        }
+                    });
+                }, {
+                    rootMargin: '20px'
+                });
+
+                observer.observe(terminalText);
+            }
+
+            // Technology Modal System
+            function initTechModal() {
+                const modal = document.getElementById('techModal');
+                const closeBtn = document.getElementsByClassName('tech-modal-close')[0];
+                const modalIcon = document.getElementById('modalIcon');
+                const modalTitle = document.getElementById('modalTitle');
+                const modalDescription = document.getElementById('modalDescription');
+                const modalFeatureList = document.getElementById('modalFeatureList');
+
+                // Technology data
+                const techData = {
+                    'html5': {
+                        title: 'HTML5',
+                        description: 'The latest evolution of the HTML standard, providing semantic markup, multimedia support, and enhanced web application capabilities. Used extensively in all my web development projects for structuring content.',
+                        features: [
+                            'Semantic markup for better SEO and accessibility',
+                            'Native video and audio support',
+                            'Canvas API for graphics and animations',
+                            'Form validation and new input types',
+                            'Local storage and offline application support'
+                        ]
+                    },
+                    'css3': {
+                        title: 'CSS3',
+                        description: 'Advanced styling language with modern features like flexbox, grid, animations, and responsive design. I leverage CSS3 for creating visually appealing and responsive user interfaces.',
+                        features: [
+                            'Flexbox and CSS Grid for modern layouts',
+                            'Animations and transitions for enhanced UX',
+                            'Media queries for responsive design',
+                            'Custom properties (CSS variables)',
+                            'Advanced selectors and pseudo-classes'
+                        ]
+                    },
+                    'javascript': {
+                        title: 'JavaScript',
+                        description: 'Dynamic programming language that powers interactive web experiences. I use modern JavaScript (ES6+) for both frontend and backend development, creating responsive and engaging applications.',
+                        features: [
+                            'ES6+ features (arrow functions, destructuring, modules)',
+                            'Asynchronous programming (Promises, async/await)',
+                            'DOM manipulation and event handling',
+                            'API integration and AJAX requests',
+                            'Modern frameworks and libraries integration'
+                        ]
+                    },
+                    'spring-boot': {
+                        title: 'Spring Boot',
+                        description: 'Java-based framework that simplifies enterprise application development. I use Spring Boot for building robust, scalable backend services with minimal configuration.',
+                        features: [
+                            'Auto-configuration and opinionated defaults',
+                            'Embedded server support (Tomcat, Jetty)',
+                            'Production-ready features (health checks, metrics)',
+                            'Microservices architecture support',
+                            'Comprehensive security integration'
+                        ]
+                    },
+                    'reactjs': {
+                        title: 'React.js',
+                        description: 'Modern JavaScript library for building user interfaces with component-based architecture. I develop interactive and performant web applications using React ecosystem.',
+                        features: [
+                            'Component-based architecture for reusability',
+                            'Virtual DOM for optimal performance',
+                            'Hooks for state management and lifecycle',
+                            'Rich ecosystem with routing and state management',
+                            'Server-side rendering capabilities'
+                        ]
+                    },
+                    'mysql': {
+                        title: 'MySQL',
+                        description: 'Reliable relational database management system used in my web applications for data storage, user management, and complex queries with excellent performance.',
+                        features: [
+                            'ACID compliance for data integrity',
+                            'High performance with query optimization',
+                            'Replication and clustering support',
+                            'Comprehensive indexing strategies',
+                            'Integration with modern frameworks'
+                        ]
+                    },
+                    'docker': {
+                        title: 'Docker',
+                        description: 'Containerization platform that I use for consistent deployment across development, testing, and production environments. Essential for my DevOps workflow.',
+                        features: [
+                            'Consistent environments across platforms',
+                            'Lightweight virtualization',
+                            'Container orchestration capabilities',
+                            'Simplified deployment and scaling',
+                            'Integration with CI/CD pipelines'
+                        ]
+                    }
+                };
+
+                // Add click handlers to all skill items
+                document.querySelectorAll('.skill-item-professional, .skill-item-ai').forEach(item => {
+                    item.addEventListener('click', function() {
+                        const techKey = this.getAttribute('data-tech');
+                        const imgSrc = this.querySelector('img').src;
+                        const imgAlt = this.querySelector('img').alt;
+                        
+                        if (techData[techKey]) {
+                            openModal(techData[techKey], imgSrc, imgAlt);
+                        } else {
+                            // Fallback for technologies without detailed data
+                            openModal({
+                                title: imgAlt,
+                                description: `${imgAlt} is one of the key technologies in my development toolkit. I use it for various projects and continue to expand my expertise in this area.`,
+                                features: [
+                                    'Professional experience in real projects',
+                                    'Continuous learning and skill development',
+                                    'Integration with other technologies',
+                                    'Best practices implementation'
+                                ]
+                            }, imgSrc, imgAlt);
+                        }
+                    });
+                });
+
+                function openModal(tech, imgSrc, imgAlt) {
+                    modalIcon.src = imgSrc;
+                    modalIcon.alt = imgAlt;
+                    modalTitle.textContent = tech.title;
+                    modalDescription.textContent = tech.description;
+                    
+                    // Clear and populate features list
+                    modalFeatureList.innerHTML = '';
+                    tech.features.forEach(feature => {
+                        const li = document.createElement('li');
+                        li.textContent = feature;
+                        modalFeatureList.appendChild(li);
+                    });
+                    
+                    modal.style.display = 'block';
+                    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                }
+
+                function closeModal() {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto'; // Restore scrolling
+                }
+
+                // Close modal handlers
+                closeBtn.addEventListener('click', closeModal);
+                
+                window.addEventListener('click', function(event) {
+                    if (event.target === modal) {
+                        closeModal();
+                    }
+                });
+
+                // Close with Escape key
+                document.addEventListener('keydown', function(event) {
+                    if (event.key === 'Escape' && modal.style.display === 'block') {
+                        closeModal();
+                    }
+                });
+            }
+
+            // Add keyboard navigation for accessibility
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Tab') {
+                    document.body.classList.add('using-keyboard');
+                }
+            });
+
+            document.addEventListener('mousedown', function() {
+                document.body.classList.remove('using-keyboard');
+            });
+
+            // Professional loading completion
+            window.addEventListener('load', function() {
+                // Add completion class for any final animations
+                document.body.classList.add('loaded');
+                
+                // Initialize service worker for caching
+                if ('serviceWorker' in navigator) {
+                    navigator.serviceWorker.register('/sw.js').catch(function() {
+                        // Service worker registration failed, but don't break the site
+                        console.log('Service worker registration failed - running without cache');
+                    });
+                }
+            });
         });
 
-        // Update copyright year
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-        // Optional: Simple parallax for masthead text (can be improved with GSAP)
-        // window.addEventListener('scroll', function() {
-        //     const scrolled = window.pageYOffset;
-        //     const mastheadContent = document.querySelector('.masthead-content');
-        //     if (mastheadContent) {
-        //       // Adjust the 0.5 factor for more or less parallax effect
-        //       mastheadContent.style.transform = 'translateY(' + scrolled * 0.3 + 'px)';
-        //       mastheadContent.style.opacity = 1 - (scrolled / 500); // Fade out as scrolling
-        //     }
-        // });
+        // Add CSS animations via JavaScript for better performance
+        const dynamicStyles = document.createElement('style');
+        dynamicStyles.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: translate(-50%, -50%) scale(4);
+                    opacity: 0;
+                }
+            }
+            
+            .using-keyboard *:focus {
+                outline: 2px solid #667eea !important;
+                outline-offset: 2px;
+            }
+            
+            .loaded .skill-item-professional {
+                animation: skillFadeIn 0.6s ease-out forwards;
+            }
+            
+            @keyframes skillFadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .connection-slow-2g .skill-item-professional:hover,
+            .connection-2g .skill-item-professional:hover {
+                transform: translateY(-3px) scale(1.01) !important;
+            }
+        `;
+        document.head.appendChild(dynamicStyles);
     </script>
     
 </body>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Test - yeems214.xyz</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-card {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        .good { color: #28a745; }
+        .warning { color: #ffc107; }
+        .poor { color: #dc3545; }
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Performance Test Results</h1>
+    <p>This page measures the performance improvements after optimization.</p>
+
+    <div class="test-card">
+        <h2>Core Web Vitals</h2>
+        <div class="metric">
+            <span>Largest Contentful Paint (LCP):</span>
+            <span id="lcp"><div class="loading"></div></span>
+        </div>
+        <div class="metric">
+            <span>First Input Delay (FID):</span>
+            <span id="fid">Waiting for interaction...</span>
+        </div>
+        <div class="metric">
+            <span>Cumulative Layout Shift (CLS):</span>
+            <span id="cls"><div class="loading"></div></span>
+        </div>
+    </div>
+
+    <div class="test-card">
+        <h2>Loading Performance</h2>
+        <div class="metric">
+            <span>Page Load Time:</span>
+            <span id="loadTime"><div class="loading"></div></span>
+        </div>
+        <div class="metric">
+            <span>DOM Content Loaded:</span>
+            <span id="domContentLoaded"><div class="loading"></div></span>
+        </div>
+        <div class="metric">
+            <span>First Contentful Paint (FCP):</span>
+            <span id="fcp"><div class="loading"></div></span>
+        </div>
+    </div>
+
+    <div class="test-card">
+        <h2>Network Information</h2>
+        <div class="metric">
+            <span>Connection Type:</span>
+            <span id="connectionType">Unknown</span>
+        </div>
+        <div class="metric">
+            <span>Effective Type:</span>
+            <span id="effectiveType">Unknown</span>
+        </div>
+        <div class="metric">
+            <span>Downlink Speed:</span>
+            <span id="downlink">Unknown</span>
+        </div>
+    </div>
+
+    <div class="test-card">
+        <h2>Resource Loading</h2>
+        <div class="metric">
+            <span>Total Resources:</span>
+            <span id="totalResources"><div class="loading"></div></span>
+        </div>
+        <div class="metric">
+            <span>Images Loaded:</span>
+            <span id="imagesLoaded"><div class="loading"></div></span>
+        </div>
+        <div class="metric">
+            <span>CSS Files:</span>
+            <span id="cssFiles"><div class="loading"></div></span>
+        </div>
+        <div class="metric">
+            <span>JS Files:</span>
+            <span id="jsFiles"><div class="loading"></div></span>
+        </div>
+    </div>
+
+    <div class="test-card">
+        <h2>Optimization Status</h2>
+        <div class="metric">
+            <span>Service Worker:</span>
+            <span id="serviceWorker">Checking...</span>
+        </div>
+        <div class="metric">
+            <span>WebP Support:</span>
+            <span id="webpSupport">Checking...</span>
+        </div>
+        <div class="metric">
+            <span>Lazy Loading:</span>
+            <span id="lazyLoading">Checking...</span>
+        </div>
+    </div>
+
+    <script>
+        // Performance measurement functions
+        function measurePerformance() {
+            // Page Load Time
+            window.addEventListener('load', () => {
+                const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+                document.getElementById('loadTime').innerHTML = `<span class="${loadTime < 3000 ? 'good' : loadTime < 5000 ? 'warning' : 'poor'}">${loadTime}ms</span>`;
+            });
+
+            // DOM Content Loaded
+            document.addEventListener('DOMContentLoaded', () => {
+                const domTime = performance.timing.domContentLoadedEventEnd - performance.timing.navigationStart;
+                document.getElementById('domContentLoaded').innerHTML = `<span class="${domTime < 1500 ? 'good' : domTime < 3000 ? 'warning' : 'poor'}">${domTime}ms</span>`;
+            });
+
+            // Network Information
+            if ('connection' in navigator) {
+                const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+                if (connection) {
+                    document.getElementById('connectionType').textContent = connection.type || 'Unknown';
+                    document.getElementById('effectiveType').innerHTML = `<span class="${connection.effectiveType === '4g' ? 'good' : connection.effectiveType === '3g' ? 'warning' : 'poor'}">${connection.effectiveType}</span>`;
+                    document.getElementById('downlink').innerHTML = `<span class="${connection.downlink > 5 ? 'good' : connection.downlink > 1 ? 'warning' : 'poor'}">${connection.downlink} Mbps</span>`;
+                }
+            }
+
+            // Service Worker check
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistration().then(registration => {
+                    document.getElementById('serviceWorker').innerHTML = registration ? 
+                        '<span class="good">Active</span>' : '<span class="warning">Not registered</span>';
+                });
+            } else {
+                document.getElementById('serviceWorker').innerHTML = '<span class="poor">Not supported</span>';
+            }
+
+            // WebP support check
+            const webp = new Image();
+            webp.onload = webp.onerror = function () {
+                document.getElementById('webpSupport').innerHTML = (webp.height === 2) ? 
+                    '<span class="good">Supported</span>' : '<span class="poor">Not supported</span>';
+            };
+            webp.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
+
+            // Lazy loading check
+            const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+            document.getElementById('lazyLoading').innerHTML = lazyImages.length > 0 ? 
+                `<span class="good">${lazyImages.length} images</span>` : '<span class="warning">Not implemented</span>';
+
+            // Resource counting (after page load)
+            setTimeout(() => {
+                const resources = performance.getEntriesByType('resource');
+                const images = resources.filter(r => r.initiatorType === 'img').length;
+                const css = resources.filter(r => r.initiatorType === 'link' && r.name.includes('.css')).length;
+                const js = resources.filter(r => r.initiatorType === 'script').length;
+
+                document.getElementById('totalResources').textContent = resources.length;
+                document.getElementById('imagesLoaded').textContent = images;
+                document.getElementById('cssFiles').textContent = css;
+                document.getElementById('jsFiles').textContent = js;
+            }, 2000);
+        }
+
+        // Core Web Vitals measurement (requires web-vitals library or manual implementation)
+        function measureCoreWebVitals() {
+            // Simplified LCP measurement
+            if ('PerformanceObserver' in window) {
+                new PerformanceObserver((entryList) => {
+                    const entries = entryList.getEntries();
+                    const lastEntry = entries[entries.length - 1];
+                    const lcp = lastEntry.startTime;
+                    document.getElementById('lcp').innerHTML = `<span class="${lcp < 2500 ? 'good' : lcp < 4000 ? 'warning' : 'poor'}">${Math.round(lcp)}ms</span>`;
+                }).observe({entryTypes: ['largest-contentful-paint']});
+
+                // FID measurement
+                new PerformanceObserver((entryList) => {
+                    for (const entry of entryList.getEntries()) {
+                        const fid = entry.processingStart - entry.startTime;
+                        document.getElementById('fid').innerHTML = `<span class="${fid < 100 ? 'good' : fid < 300 ? 'warning' : 'poor'}">${Math.round(fid)}ms</span>`;
+                    }
+                }).observe({entryTypes: ['first-input']});
+
+                // CLS measurement
+                let cls = 0;
+                new PerformanceObserver((entryList) => {
+                    for (const entry of entryList.getEntries()) {
+                        if (!entry.hadRecentInput) {
+                            cls += entry.value;
+                        }
+                    }
+                    document.getElementById('cls').innerHTML = `<span class="${cls < 0.1 ? 'good' : cls < 0.25 ? 'warning' : 'poor'}">${cls.toFixed(3)}</span>`;
+                }).observe({entryTypes: ['layout-shift']});
+
+                // FCP measurement
+                new PerformanceObserver((entryList) => {
+                    const entries = entryList.getEntries();
+                    const fcp = entries[0].startTime;
+                    document.getElementById('fcp').innerHTML = `<span class="${fcp < 1800 ? 'good' : fcp < 3000 ? 'warning' : 'poor'}">${Math.round(fcp)}ms</span>`;
+                }).observe({entryTypes: ['paint']});
+            }
+        }
+
+        // Initialize measurements
+        measurePerformance();
+        measureCoreWebVitals();
+
+        // Add a button to test the main site
+        const testButton = document.createElement('button');
+        testButton.textContent = 'Test Main Site Performance';
+        testButton.style.cssText = 'background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; margin: 20px 0;';
+        testButton.onclick = () => {
+            window.open('index.html', '_blank');
+        };
+        document.body.appendChild(testButton);
+    </script>
+</body>
+</html> 

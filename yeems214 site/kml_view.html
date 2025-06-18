@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tudela GIS Mapping Tool</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css" />
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 300;
+        }
+        
+        .header .subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+        
+        .container {
+            display: flex;
+            height: calc(100vh - 80px);
+        }
+        
+        .sidebar {
+            width: 350px;
+            background: white;
+            border-right: 1px solid #ddd;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+        }
+        
+        .map-container {
+            flex: 1;
+            position: relative;
+        }
+        
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+        
+        .control-panel {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .control-group {
+            margin-bottom: 20px;
+        }
+        
+        .control-group h3 {
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .file-input-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .file-input {
+            position: absolute;
+            left: -9999px;
+        }
+        
+        .file-input-button {
+            display: block;
+            width: 100%;
+            padding: 12px 16px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: center;
+            transition: background 0.3s;
+            font-size: 14px;
+        }
+        
+        .file-input-button:hover {
+            background: #5a6fd8;
+        }
+        
+        .drawing-controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .draw-button {
+            padding: 10px 12px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.3s;
+        }
+        
+        .draw-button:hover {
+            background: #218838;
+        }
+        
+        .draw-button.active {
+            background: #dc3545;
+        }
+        
+        .clear-button {
+            background: #ffc107;
+            color: #212529;
+        }
+        
+        .clear-button:hover {
+            background: #e0a800;
+        }
+        
+        .results-panel {
+            padding: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .results-count {
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .structure-item {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .structure-item:hover {
+            background: #e9ecef;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .structure-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+        
+        .structure-type {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .structure-coords {
+            font-size: 11px;
+            color: #999;
+            font-family: monospace;
+        }
+        
+        .export-controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .export-button {
+            padding: 10px 12px;
+            background: #17a2b8;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.3s;
+        }
+        
+        .export-button:hover {
+            background: #138496;
+        }
+        
+        .status-message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .status-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        .legend {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin: 15px;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            min-width: 200px;
+        }
+        
+        .legend h4 {
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
+        
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+            margin-right: 8px;
+            border: 1px solid #ccc;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+        
+        .loading.show {
+            display: block;
+        }
+        
+        .plot-naming {
+            margin-top: 10px;
+        }
+        
+        .plot-name-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .plots-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .plot-item {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 10px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .plot-item:hover {
+            background: #e9ecef;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .plot-item.selected {
+            background: #d4edda;
+            border-color: #c3e6cb;
+        }
+        
+        .plot-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        
+        .plot-name {
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .plot-actions {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .plot-action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-size: 12px;
+            transition: background 0.3s;
+        }
+        
+        .plot-action-btn:hover {
+            background: rgba(0,0,0,0.1);
+        }
+        
+        .plot-info {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .plot-empty-state {
+            text-align: center;
+            color: #666;
+            padding: 10px;
+        }
+        
+        .legend-residential { background-color: rgba(255, 0, 0, 0.5); }
+        .legend-commercial { background-color: rgba(0, 255, 0, 0.5); }
+        .legend-industrial { background-color: rgba(0, 0, 255, 0.5); }
+        .legend-institutional { background-color: rgba(255, 0, 255, 0.5); }
+        .legend-transportation { background-color: rgba(255, 255, 0, 0.5); }
+        .legend-other { background-color: rgba(128, 128, 128, 0.5); }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: 40vh;
+            }
+            
+            .map-container {
+                height: 60vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Tudela GIS Mapping Tool</h1>
+        <div class="subtitle">Interactive mapping for structure analysis and area selection</div>
+    </div>
+    
+    <div class="container">
+        <div class="sidebar">
+            <div class="control-panel">
+                <div class="control-group">
+                    <h3>📁 Load KML Data</h3>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="kmlFile" class="file-input" accept=".kml" />
+                        <label for="kmlFile" class="file-input-button">
+                            Choose KML File
+                        </label>
+                    </div>
+                    <div id="fileStatus" class="status-message" style="display: none;"></div>
+                </div>
+                
+                <div class="control-group">
+                    <h3>🎨 Drawing Tools</h3>
+                    <div class="drawing-controls">
+                        <button id="drawPolygon" class="draw-button">📐 Polygon</button>
+                        <button id="drawRectangle" class="draw-button">⬜ Rectangle</button>
+                        <button id="drawCircle" class="draw-button">⭕ Circle</button>
+                        <button id="clearDrawings" class="draw-button clear-button">🗑️ Clear All</button>
+                    </div>
+                    <div class="plot-naming">
+                        <input type="text" id="plotName" placeholder="Plot name (optional)" 
+                               class="plot-name-input">
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <h3>🗂️ Drawing Plots</h3>
+                    <div id="plotsList" class="plots-list">
+                        <div class="plot-empty-state">No plots created yet</div>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <h3>📊 Export Options</h3>
+                    <div class="export-controls">
+                        <button id="exportCSV" class="export-button">📄 Export CSV</button>
+                        <button id="exportJSON" class="export-button">📋 Export JSON</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="loading" id="loading">
+                <div>🔄 Loading structures...</div>
+            </div>
+            
+            <div class="results-panel">
+                <div class="results-header">
+                    <h3 id="resultsTitle">🏗️ Selected Structures</h3>
+                    <span id="resultsCount" class="results-count">0</span>
+                </div>
+                <div id="structuresList"></div>
+            </div>
+        </div>
+        
+        <div class="map-container">
+            <div id="map"></div>
+            
+            <div class="legend">
+                <h4>🎨 Structure Types</h4>
+                <div class="legend-item">
+                    <div class="legend-color legend-residential"></div>
+                    <span>Residential</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-commercial"></div>
+                    <span>Commercial</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-industrial"></div>
+                    <span>Industrial</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-institutional"></div>
+                    <span>Institutional</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-transportation"></div>
+                    <span>Transportation</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-other"></div>
+                    <span>Other</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
+    
+    <script>
+        class TudelaGIS {
+            constructor() {
+                this.map = null;
+                this.kmlLayer = null;
+                this.drawGroup = null;
+                this.drawnItems = null;
+                this.structures = [];
+                this.selectedStructures = [];
+                this.activeDrawingTool = null;
+                this.plots = []; // Array to store multiple plots
+                this.plotCounter = 0; // Counter for automatic plot naming
+                this.selectedPlotId = null; // Currently selected plot
+                
+                this.init();
+            }
+            
+            init() {
+                this.initMap();
+                this.initDrawingTools();
+                this.bindEvents();
+                this.showStatus('Ready to load KML data', 'info');
+            }
+            
+            initMap() {
+                // Initialize map centered on Tudela, Cebu
+                this.map = L.map('map').setView([10.6609238, 124.4752715], 13);
+                
+                // Add tile layers
+                const osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors'
+                });
+                
+                const satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                    attribution: 'Tiles &copy; Esri'
+                });
+                
+                // Add default layer
+                osmLayer.addTo(this.map);
+                
+                // Add layer control
+                const baseMaps = {
+                    "OpenStreetMap": osmLayer,
+                    "Satellite": satelliteLayer
+                };
+                
+                L.control.layers(baseMaps).addTo(this.map);
+                
+                // Add scale control
+                L.control.scale().addTo(this.map);
+                
+                // Initialize feature groups for drawings
+                this.drawnItems = new L.FeatureGroup();
+                this.map.addLayer(this.drawnItems);
+            }
+            
+            initDrawingTools() {
+                // Drawing control options
+                this.drawControl = new L.Control.Draw({
+                    position: 'topright',
+                    draw: {
+                        polygon: {
+                            allowIntersection: false,
+                            drawError: {
+                                color: '#e1e100',
+                                message: '<strong>Error:</strong> Shape edges cannot cross!'
+                            },
+                            shapeOptions: {
+                                color: '#ff0000',
+                                weight: 2,
+                                fillOpacity: 0.2
+                            }
+                        },
+                        rectangle: {
+                            shapeOptions: {
+                                color: '#ff0000',
+                                weight: 2,
+                                fillOpacity: 0.2
+                            }
+                        },
+                        circle: {
+                            shapeOptions: {
+                                color: '#ff0000',
+                                weight: 2,
+                                fillOpacity: 0.2
+                            }
+                        },
+                        polyline: false,
+                        marker: false,
+                        circlemarker: false
+                    },
+                    edit: {
+                        featureGroup: this.drawnItems,
+                        remove: true
+                    }
+                });
+                
+                this.map.addControl(this.drawControl);
+                
+                // Event handlers for drawing
+                this.map.on(L.Draw.Event.CREATED, (e) => {
+                    const layer = e.layer;
+                    this.drawnItems.addLayer(layer);
+                    this.createPlot(layer);
+                });
+                
+                this.map.on(L.Draw.Event.EDITED, (e) => {
+                    e.layers.eachLayer((layer) => {
+                        this.updatePlotFromLayer(layer);
+                    });
+                });
+                
+                this.map.on(L.Draw.Event.DELETED, (e) => {
+                    e.layers.eachLayer((layer) => {
+                        this.deletePlotByLayer(layer);
+                    });
+                    this.updatePlotsDisplay();
+                });
+            }
+            
+            bindEvents() {
+                // File input handler
+                document.getElementById('kmlFile').addEventListener('change', (e) => {
+                    this.loadKMLFile(e.target.files[0]);
+                });
+                
+                // Drawing tool buttons
+                document.getElementById('drawPolygon').addEventListener('click', () => {
+                    this.activateDrawingTool('polygon');
+                });
+                
+                document.getElementById('drawRectangle').addEventListener('click', () => {
+                    this.activateDrawingTool('rectangle');
+                });
+                
+                document.getElementById('drawCircle').addEventListener('click', () => {
+                    this.activateDrawingTool('circle');
+                });
+                
+                document.getElementById('clearDrawings').addEventListener('click', () => {
+                    this.clearDrawings();
+                });
+                
+                // Export buttons
+                document.getElementById('exportCSV').addEventListener('click', () => {
+                    this.exportToCSV();
+                });
+                
+                document.getElementById('exportJSON').addEventListener('click', () => {
+                    this.exportToJSON();
+                });
+            }
+            
+            activateDrawingTool(tool) {
+                // Reset button states
+                document.querySelectorAll('.draw-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Activate selected tool
+                const toolMap = {
+                    'polygon': new L.Draw.Polygon(this.map),
+                    'rectangle': new L.Draw.Rectangle(this.map),
+                    'circle': new L.Draw.Circle(this.map)
+                };
+                
+                if (this.activeDrawingTool) {
+                    this.activeDrawingTool.disable();
+                }
+                
+                this.activeDrawingTool = toolMap[tool];
+                this.activeDrawingTool.enable();
+                
+                // Update button state
+                document.getElementById(`draw${tool.charAt(0).toUpperCase() + tool.slice(1)}`).classList.add('active');
+            }
+            
+            async loadKMLFile(file) {
+                if (!file) return;
+                
+                this.showLoading(true);
+                this.showStatus('Loading KML file...', 'info');
+                
+                try {
+                    const text = await this.readFileAsText(file);
+                    const kmlData = this.parseKML(text);
+                    
+                    // Clear existing data
+                    if (this.kmlLayer) {
+                        this.map.removeLayer(this.kmlLayer);
+                    }
+                    
+                    this.structures = [];
+                    this.kmlLayer = L.layerGroup();
+                    
+                    // Process KML data
+                    this.processKMLData(kmlData);
+                    
+                    // Add to map
+                    this.kmlLayer.addTo(this.map);
+                    
+                    // Fit map to structures
+                    if (this.structures.length > 0) {
+                        const group = new L.featureGroup(this.kmlLayer.getLayers());
+                        this.map.fitBounds(group.getBounds().pad(0.1));
+                    }
+                    
+                    this.showStatus(`Loaded ${this.structures.length} structures successfully`, 'success');
+                    
+                    // Re-analyze existing plots with new structure data
+                    this.refreshPlotsData();
+                    
+                } catch (error) {
+                    console.error('Error loading KML:', error);
+                    this.showStatus('Error loading KML file: ' + error.message, 'error');
+                } finally {
+                    this.showLoading(false);
+                }
+            }
+            
+            refreshPlotsData() {
+                // Re-analyze all existing plots with new structure data
+                this.plots.forEach(plot => {
+                    this.analyzeAreaForPlot(plot);
+                });
+                
+                this.updatePlotsDisplay();
+                
+                if (this.selectedPlotId) {
+                    this.updateResultsList();
+                    this.highlightSelectedStructures();
+                }
+            }
+            
+            readFileAsText(file) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = e => resolve(e.target.result);
+                    reader.onerror = e => reject(new Error('Failed to read file'));
+                    reader.readAsText(file);
+                });
+            }
+            
+            parseKML(kmlText) {
+                const parser = new DOMParser();
+                return parser.parseFromString(kmlText, 'text/xml');
+            }
+            
+            processKMLData(kmlDoc) {
+                const placemarks = kmlDoc.getElementsByTagName('Placemark');
+                
+                Array.from(placemarks).forEach((placemark, index) => {
+                    try {
+                        const structure = this.extractStructureData(placemark, index);
+                        if (structure) {
+                            this.structures.push(structure);
+                            this.addStructureToMap(structure);
+                        }
+                    } catch (error) {
+                        console.warn('Error processing placemark:', error);
+                    }
+                });
+            }
+            
+            extractStructureData(placemark, index) {
+                const name = this.getElementText(placemark, 'name') || `Structure ${index + 1}`;
+                const description = this.getElementText(placemark, 'description') || '';
+                
+                // Extract coordinates
+                let coordinates = [];
+                let geometry = null;
+                let center = null;
+                
+                // Check for different geometry types
+                const polygon = placemark.getElementsByTagName('Polygon')[0];
+                const lineString = placemark.getElementsByTagName('LineString')[0];
+                const point = placemark.getElementsByTagName('Point')[0];
+                
+                if (polygon) {
+                    const coordsText = this.getElementText(polygon, 'coordinates');
+                    coordinates = this.parseCoordinates(coordsText);
+                    geometry = 'polygon';
+                    center = this.calculatePolygonCenter(coordinates);
+                } else if (lineString) {
+                    const coordsText = this.getElementText(lineString, 'coordinates');
+                    coordinates = this.parseCoordinates(coordsText);
+                    geometry = 'linestring';
+                    center = coordinates[Math.floor(coordinates.length / 2)];
+                } else if (point) {
+                    const coordsText = this.getElementText(point, 'coordinates');
+                    coordinates = this.parseCoordinates(coordsText);
+                    geometry = 'point';
+                    center = coordinates[0];
+                }
+                
+                if (!coordinates.length) return null;
+                
+                // Extract structure type from description
+                const type = this.extractStructureType(description);
+                const category = this.categorizeStructure(type);
+                
+                return {
+                    id: index,
+                    name,
+                    description,
+                    type,
+                    category,
+                    geometry,
+                    coordinates,
+                    center,
+                    layer: null // Will be set when added to map
+                };
+            }
+            
+            getElementText(parent, tagName) {
+                const element = parent.getElementsByTagName(tagName)[0];
+                return element ? element.textContent.trim() : '';
+            }
+            
+            parseCoordinates(coordsText) {
+                if (!coordsText) return [];
+                
+                return coordsText.trim().split(/\s+/).map(coord => {
+                    const [lon, lat, alt] = coord.split(',').map(parseFloat);
+                    return [lat, lon]; // Leaflet uses [lat, lon]
+                }).filter(coord => !isNaN(coord[0]) && !isNaN(coord[1]));
+            }
+            
+            calculatePolygonCenter(coordinates) {
+                if (!coordinates.length) return null;
+                
+                let lat = 0, lon = 0;
+                coordinates.forEach(coord => {
+                    lat += coord[0];
+                    lon += coord[1];
+                });
+                
+                return [lat / coordinates.length, lon / coordinates.length];
+            }
+            
+            extractStructureType(description) {
+                const match = description.match(/Structure Type:\s*([^\n\r]+)/i);
+                return match ? match[1].trim() : 'Unknown';
+            }
+            
+            categorizeStructure(type) {
+                const typeUpper = type.toUpperCase();
+                
+                if (typeUpper.includes('RESIDENTIAL') || typeUpper.includes('HOUSE') || typeUpper.includes('APARTMENT')) {
+                    return 'residential';
+                } else if (typeUpper.includes('COMMERCIAL') || typeUpper.includes('SHOP') || typeUpper.includes('RETAIL')) {
+                    return 'commercial';
+                } else if (typeUpper.includes('INDUSTRIAL') || typeUpper.includes('FACTORY') || typeUpper.includes('WAREHOUSE')) {
+                    return 'industrial';
+                } else if (typeUpper.includes('SCHOOL') || typeUpper.includes('HOSPITAL') || typeUpper.includes('CHURCH')) {
+                    return 'institutional';
+                } else if (typeUpper.includes('ROAD') || typeUpper.includes('RAILWAY') || typeUpper.includes('BRIDGE')) {
+                    return 'transportation';
+                } else {
+                    return 'other';
+                }
+            }
+            
+            getStructureColor(category) {
+                const colors = {
+                    'residential': '#ff0000',
+                    'commercial': '#00ff00',
+                    'industrial': '#0000ff',
+                    'institutional': '#ff00ff',
+                    'transportation': '#ffff00',
+                    'other': '#808080'
+                };
+                return colors[category] || '#808080';
+            }
+            
+            addStructureToMap(structure) {
+                let layer;
+                const color = this.getStructureColor(structure.category);
+                const style = {
+                    color: color,
+                    weight: 2,
+                    fillColor: color,
+                    fillOpacity: 0.3
+                };
+                
+                if (structure.geometry === 'polygon') {
+                    layer = L.polygon(structure.coordinates, style);
+                } else if (structure.geometry === 'linestring') {
+                    layer = L.polyline(structure.coordinates, style);
+                } else if (structure.geometry === 'point') {
+                    layer = L.circleMarker(structure.coordinates[0], {
+                        ...style,
+                        radius: 8
+                    });
+                }
+                
+                if (layer) {
+                    // Add popup
+                    layer.bindPopup(`
+                        <div style="min-width: 200px;">
+                            <h4>${structure.name}</h4>
+                            <p><strong>Type:</strong> ${structure.type}</p>
+                            <p><strong>Category:</strong> ${structure.category}</p>
+                            <p><strong>Coordinates:</strong> ${structure.center ? structure.center.map(c => c.toFixed(6)).join(', ') : 'N/A'}</p>
+                        </div>
+                    `);
+                    
+                    // Add click handler
+                    layer.on('click', () => {
+                        this.highlightStructure(structure);
+                    });
+                    
+                    structure.layer = layer;
+                    this.kmlLayer.addLayer(layer);
+                }
+            }
+            
+            analyzeArea(drawnLayer) {
+                if (!this.structures.length) {
+                    this.showStatus('No structures loaded. Please load a KML file first.', 'error');
+                    return;
+                }
+                
+                this.selectedStructures = [];
+                
+                this.structures.forEach(structure => {
+                    if (this.isStructureInArea(structure, drawnLayer)) {
+                        this.selectedStructures.push(structure);
+                    }
+                });
+                
+                this.updateResultsList();
+                this.highlightSelectedStructures();
+                
+                this.showStatus(`Found ${this.selectedStructures.length} structures in selected area`, 'success');
+            }
+            
+            isStructureInArea(structure, drawnLayer) {
+                if (!structure.center) return false;
+                
+                const point = L.latLng(structure.center);
+                
+                if (drawnLayer instanceof L.Polygon || drawnLayer instanceof L.Rectangle) {
+                    return this.isPointInPolygon(point, drawnLayer);
+                } else if (drawnLayer instanceof L.Circle) {
+                    return drawnLayer.getLatLng().distanceTo(point) <= drawnLayer.getRadius();
+                }
+                
+                return false;
+            }
+            
+            isPointInPolygon(point, polygon) {
+                const latlngs = polygon.getLatLngs()[0];
+                let inside = false;
+                
+                for (let i = 0, j = latlngs.length - 1; i < latlngs.length; j = i++) {
+                    if (((latlngs[i].lat > point.lat) !== (latlngs[j].lat > point.lat)) &&
+                        (point.lng < (latlngs[j].lng - latlngs[i].lng) * (point.lat - latlngs[i].lat) / (latlngs[j].lat - latlngs[i].lat) + latlngs[i].lng)) {
+                        inside = !inside;
+                    }
+                }
+                
+                return inside;
+            }
+            
+            updateResultsList() {
+                const container = document.getElementById('structuresList');
+                const countElement = document.getElementById('resultsCount');
+                const titleElement = document.getElementById('resultsTitle');
+                
+                let structures = [];
+                let plotName = '';
+                
+                if (this.selectedPlotId) {
+                    const selectedPlot = this.plots.find(p => p.id === this.selectedPlotId);
+                    if (selectedPlot) {
+                        structures = selectedPlot.structures;
+                        plotName = ` in "${selectedPlot.name}"`;
+                        titleElement.textContent = `🏗️ Structures in "${selectedPlot.name}"`;
+                    }
+                } else {
+                    structures = this.selectedStructures;
+                    titleElement.textContent = '🏗️ Selected Structures';
+                }
+                
+                countElement.textContent = structures.length;
+                
+                if (structures.length === 0) {
+                    container.innerHTML = `<div style="text-align: center; color: #666; padding: 20px;">No structures selected${plotName}</div>`;
+                    return;
+                }
+                
+                container.innerHTML = structures.map((structure, index) => `
+                    <div class="structure-item" onclick="tudelaGIS.zoomToStructure(${structure.id})">
+                        <div class="structure-name">${structure.name}</div>
+                        <div class="structure-type">${structure.type}</div>
+                        <div class="structure-coords">
+                            ${structure.center ? structure.center.map(c => c.toFixed(6)).join(', ') : 'No coordinates'}
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            highlightSelectedStructures() {
+                // Reset all structure styles
+                this.structures.forEach(structure => {
+                    if (structure.layer) {
+                        const color = this.getStructureColor(structure.category);
+                        structure.layer.setStyle({
+                            color: color,
+                            weight: 2,
+                            fillOpacity: 0.3
+                        });
+                    }
+                });
+                
+                // Get structures to highlight
+                let structuresToHighlight = [];
+                if (this.selectedPlotId) {
+                    const selectedPlot = this.plots.find(p => p.id === this.selectedPlotId);
+                    if (selectedPlot) {
+                        structuresToHighlight = selectedPlot.structures;
+                    }
+                } else {
+                    structuresToHighlight = this.selectedStructures;
+                }
+                
+                // Highlight selected structures
+                structuresToHighlight.forEach(structure => {
+                    if (structure.layer) {
+                        structure.layer.setStyle({
+                            color: '#ff0000',
+                            weight: 4,
+                            fillOpacity: 0.6
+                        });
+                    }
+                });
+            }
+            
+            highlightStructure(structure) {
+                // Reset all styles first
+                this.highlightSelectedStructures();
+                
+                // Highlight the clicked structure
+                if (structure.layer) {
+                    structure.layer.setStyle({
+                        color: '#00ff00',
+                        weight: 5,
+                        fillOpacity: 0.8
+                    });
+                }
+            }
+            
+            zoomToStructure(structureId) {
+                const structure = this.structures.find(s => s.id === structureId);
+                if (structure && structure.center) {
+                    this.map.setView(structure.center, Math.max(this.map.getZoom(), 16));
+                    this.highlightStructure(structure);
+                    
+                    // Open popup if available
+                    if (structure.layer && structure.layer.getPopup) {
+                        structure.layer.openPopup();
+                    }
+                }
+            }
+            
+            clearDrawings() {
+                this.drawnItems.clearLayers();
+                this.plots = [];
+                this.plotCounter = 0;
+                this.selectedPlotId = null;
+                this.clearSelection();
+                this.updatePlotsDisplay();
+                
+                // Disable any active drawing tool
+                if (this.activeDrawingTool) {
+                    this.activeDrawingTool.disable();
+                    this.activeDrawingTool = null;
+                }
+                
+                // Reset button states
+                document.querySelectorAll('.draw-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                this.showStatus('All plots cleared', 'info');
+            }
+            
+            createPlot(layer) {
+                this.plotCounter++;
+                const plotNameInput = document.getElementById('plotName');
+                const name = plotNameInput.value.trim() || `Plot ${this.plotCounter}`;
+                
+                const plot = {
+                    id: Date.now() + Math.random(), // Unique ID
+                    name: name,
+                    layer: layer,
+                    type: this.getLayerType(layer),
+                    createdAt: new Date(),
+                    structures: []
+                };
+                
+                // Add label to the layer
+                this.addPlotLabel(layer, plot.name);
+                
+                // Analyze structures in this plot
+                this.analyzeAreaForPlot(plot);
+                
+                this.plots.push(plot);
+                this.selectedPlotId = plot.id;
+                
+                // Clear the input field
+                plotNameInput.value = '';
+                
+                this.updatePlotsDisplay();
+                this.updateResultsList();
+                
+                this.showStatus(`Created plot "${plot.name}" with ${plot.structures.length} structures`, 'success');
+            }
+            
+            addPlotLabel(layer, name) {
+                let center;
+                
+                if (layer instanceof L.Circle) {
+                    center = layer.getLatLng();
+                } else if (layer instanceof L.Polygon || layer instanceof L.Rectangle) {
+                    const bounds = layer.getBounds();
+                    center = bounds.getCenter();
+                } else {
+                    return; // Can't add label to this type
+                }
+                
+                const label = L.marker(center, {
+                    icon: L.divIcon({
+                        className: 'plot-label',
+                        html: `<div style="background: white; padding: 4px 8px; border-radius: 4px; border: 2px solid #333; font-weight: bold; font-size: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">${name}</div>`,
+                        iconSize: [100, 20],
+                        iconAnchor: [50, 10]
+                    })
+                });
+                
+                layer._plotLabel = label;
+                this.drawnItems.addLayer(label);
+            }
+            
+            getLayerType(layer) {
+                if (layer instanceof L.Circle) return 'circle';
+                if (layer instanceof L.Rectangle) return 'rectangle';
+                if (layer instanceof L.Polygon) return 'polygon';
+                return 'unknown';
+            }
+            
+            analyzeAreaForPlot(plot) {
+                if (!this.structures.length) {
+                    plot.structures = [];
+                    return;
+                }
+                
+                plot.structures = [];
+                
+                this.structures.forEach(structure => {
+                    if (this.isStructureInArea(structure, plot.layer)) {
+                        plot.structures.push(structure);
+                    }
+                });
+            }
+            
+            updatePlotFromLayer(layer) {
+                const plot = this.plots.find(p => p.layer === layer);
+                if (plot) {
+                    // Update the label position
+                    if (layer._plotLabel) {
+                        this.drawnItems.removeLayer(layer._plotLabel);
+                        this.addPlotLabel(layer, plot.name);
+                    }
+                    
+                    // Re-analyze structures
+                    this.analyzeAreaForPlot(plot);
+                    this.updatePlotsDisplay();
+                    
+                    if (this.selectedPlotId === plot.id) {
+                        this.updateResultsList();
+                    }
+                }
+            }
+            
+            deletePlotByLayer(layer) {
+                const plotIndex = this.plots.findIndex(p => p.layer === layer);
+                if (plotIndex !== -1) {
+                    const plot = this.plots[plotIndex];
+                    
+                    // Remove label
+                    if (layer._plotLabel) {
+                        this.drawnItems.removeLayer(layer._plotLabel);
+                    }
+                    
+                    // Remove from plots array
+                    this.plots.splice(plotIndex, 1);
+                    
+                    // Update selected plot if necessary
+                    if (this.selectedPlotId === plot.id) {
+                        this.selectedPlotId = this.plots.length > 0 ? this.plots[0].id : null;
+                    }
+                }
+            }
+            
+            selectPlot(plotId) {
+                this.selectedPlotId = plotId;
+                const plot = this.plots.find(p => p.id === plotId);
+                
+                if (plot) {
+                    // Highlight the selected plot's structures
+                    this.selectedStructures = [...plot.structures];
+                    this.highlightSelectedStructures();
+                    this.updateResultsList();
+                    
+                    // Zoom to plot
+                    if (plot.layer instanceof L.Circle) {
+                        this.map.setView(plot.layer.getLatLng(), Math.max(this.map.getZoom(), 15));
+                    } else if (plot.layer.getBounds) {
+                        this.map.fitBounds(plot.layer.getBounds(), { padding: [20, 20] });
+                    }
+                }
+                
+                this.updatePlotsDisplay();
+            }
+            
+            deletePlot(plotId) {
+                const plotIndex = this.plots.findIndex(p => p.id === plotId);
+                if (plotIndex !== -1) {
+                    const plot = this.plots[plotIndex];
+                    
+                    // Remove from map
+                    this.drawnItems.removeLayer(plot.layer);
+                    if (plot.layer._plotLabel) {
+                        this.drawnItems.removeLayer(plot.layer._plotLabel);
+                    }
+                    
+                    // Remove from array
+                    this.plots.splice(plotIndex, 1);
+                    
+                    // Update selected plot
+                    if (this.selectedPlotId === plotId) {
+                        this.selectedPlotId = this.plots.length > 0 ? this.plots[0].id : null;
+                        if (this.selectedPlotId) {
+                            this.selectPlot(this.selectedPlotId);
+                        } else {
+                            this.clearSelection();
+                        }
+                    }
+                    
+                    this.updatePlotsDisplay();
+                    this.showStatus(`Deleted plot "${plot.name}"`, 'info');
+                }
+            }
+            
+            renamePlot(plotId, newName) {
+                const plot = this.plots.find(p => p.id === plotId);
+                if (plot && newName.trim()) {
+                    plot.name = newName.trim();
+                    
+                    // Update label
+                    if (plot.layer._plotLabel) {
+                        this.drawnItems.removeLayer(plot.layer._plotLabel);
+                        this.addPlotLabel(plot.layer, plot.name);
+                    }
+                    
+                    this.updatePlotsDisplay();
+                    if (this.selectedPlotId === plotId) {
+                        this.updateResultsList();
+                    }
+                }
+            }
+            
+            updatePlotsDisplay() {
+                const container = document.getElementById('plotsList');
+                
+                if (this.plots.length === 0) {
+                    container.innerHTML = '<div class="plot-empty-state">No plots created yet</div>';
+                    return;
+                }
+                
+                container.innerHTML = this.plots.map(plot => `
+                    <div class="plot-item ${this.selectedPlotId === plot.id ? 'selected' : ''}" 
+                         onclick="tudelaGIS.selectPlot(${plot.id})">
+                        <div class="plot-header">
+                            <div class="plot-name">${plot.name}</div>
+                            <div class="plot-actions">
+                                <button class="plot-action-btn" onclick="event.stopPropagation(); tudelaGIS.promptRenamePlot(${plot.id})" 
+                                        title="Rename plot">✏️</button>
+                                <button class="plot-action-btn" onclick="event.stopPropagation(); tudelaGIS.deletePlot(${plot.id})" 
+                                        title="Delete plot">🗑️</button>
+                            </div>
+                        </div>
+                        <div class="plot-info">
+                            ${plot.type} • ${plot.structures.length} structures • ${plot.createdAt.toLocaleDateString()}
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            promptRenamePlot(plotId) {
+                const plot = this.plots.find(p => p.id === plotId);
+                if (plot) {
+                    const newName = prompt('Enter new name for the plot:', plot.name);
+                    if (newName !== null) {
+                        this.renamePlot(plotId, newName);
+                    }
+                }
+            }
+            
+            clearSelection() {
+                this.selectedStructures = [];
+                this.selectedPlotId = null;
+                this.updateResultsList();
+                this.updatePlotsDisplay();
+                
+                // Reset all structure styles
+                this.structures.forEach(structure => {
+                    if (structure.layer) {
+                        const color = this.getStructureColor(structure.category);
+                        structure.layer.setStyle({
+                            color: color,
+                            weight: 2,
+                            fillOpacity: 0.3
+                        });
+                    }
+                });
+            }
+            
+            // Legacy method for backward compatibility
+            analyzeArea(drawnLayer) {
+                if (!this.structures.length) {
+                    this.showStatus('No structures loaded. Please load a KML file first.', 'error');
+                    return;
+                }
+                
+                this.selectedStructures = [];
+                
+                this.structures.forEach(structure => {
+                    if (this.isStructureInArea(structure, drawnLayer)) {
+                        this.selectedStructures.push(structure);
+                    }
+                });
+                
+                this.updateResultsList();
+                this.highlightSelectedStructures();
+                
+                this.showStatus(`Found ${this.selectedStructures.length} structures in selected area`, 'success');
+            }
+            
+            exportToCSV() {
+                let structures = [];
+                let fileName = 'tudela_structures.csv';
+                
+                if (this.selectedPlotId) {
+                    const selectedPlot = this.plots.find(p => p.id === this.selectedPlotId);
+                    if (selectedPlot) {
+                        structures = selectedPlot.structures;
+                        fileName = `tudela_${selectedPlot.name.replace(/[^a-zA-Z0-9]/g, '_')}.csv`;
+                    }
+                } else {
+                    structures = this.selectedStructures;
+                }
+                
+                if (!structures.length) {
+                    this.showStatus('No structures available for export', 'error');
+                    return;
+                }
+                
+                const headers = ['ID', 'Name', 'Type', 'Category', 'Latitude', 'Longitude', 'Description'];
+                const rows = structures.map(structure => [
+                    structure.id,
+                    `"${structure.name}"`,
+                    `"${structure.type}"`,
+                    structure.category,
+                    structure.center ? structure.center[0].toFixed(6) : '',
+                    structure.center ? structure.center[1].toFixed(6) : '',
+                    `"${structure.description.replace(/"/g, '""')}"`
+                ]);
+                
+                const csvContent = [headers.join(','), ...rows.map(row => row.join(','))].join('\n');
+                
+                this.downloadFile(csvContent, fileName, 'text/csv');
+                this.showStatus(`Exported ${structures.length} structures to CSV`, 'success');
+            }
+            
+            exportToJSON() {
+                let structures = [];
+                let fileName = 'tudela_structures.json';
+                let plotInfo = null;
+                
+                if (this.selectedPlotId) {
+                    const selectedPlot = this.plots.find(p => p.id === this.selectedPlotId);
+                    if (selectedPlot) {
+                        structures = selectedPlot.structures;
+                        fileName = `tudela_${selectedPlot.name.replace(/[^a-zA-Z0-9]/g, '_')}.json`;
+                        plotInfo = {
+                            plot_name: selectedPlot.name,
+                            plot_type: selectedPlot.type,
+                            created_at: selectedPlot.createdAt.toISOString()
+                        };
+                    }
+                } else {
+                    structures = this.selectedStructures;
+                }
+                
+                if (!structures.length) {
+                    this.showStatus('No structures available for export', 'error');
+                    return;
+                }
+                
+                const exportData = {
+                    export_info: {
+                        timestamp: new Date().toISOString(),
+                        total_structures: structures.length,
+                        location: "Tudela, Cebu",
+                        generated_by: "Tudela GIS Mapping Tool",
+                        ...(plotInfo && { plot_info: plotInfo })
+                    },
+                    structures: structures.map(structure => ({
+                        id: structure.id,
+                        name: structure.name,
+                        type: structure.type,
+                        category: structure.category,
+                        coordinates: {
+                            latitude: structure.center ? structure.center[0] : null,
+                            longitude: structure.center ? structure.center[1] : null
+                        },
+                        geometry: structure.geometry,
+                        description: structure.description
+                    }))
+                };
+                
+                const jsonContent = JSON.stringify(exportData, null, 2);
+                
+                this.downloadFile(jsonContent, fileName, 'application/json');
+                this.showStatus(`Exported ${structures.length} structures to JSON`, 'success');
+            }
+            
+            downloadFile(content, filename, mimeType) {
+                const blob = new Blob([content], { type: mimeType });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            }
+            
+            showStatus(message, type = 'info') {
+                const statusElement = document.getElementById('fileStatus');
+                statusElement.textContent = message;
+                statusElement.className = `status-message status-${type}`;
+                statusElement.style.display = 'block';
+                
+                // Auto-hide after 5 seconds for non-error messages
+                if (type !== 'error') {
+                    setTimeout(() => {
+                        statusElement.style.display = 'none';
+                    }, 5000);
+                }
+            }
+            
+            showLoading(show) {
+                const loadingElement = document.getElementById('loading');
+                if (show) {
+                    loadingElement.classList.add('show');
+                } else {
+                    loadingElement.classList.remove('show');
+                }
+            }
+        }
+        
+        // Initialize the application
+        let tudelaGIS;
+        document.addEventListener('DOMContentLoaded', () => {
+            tudelaGIS = new TudelaGIS();
+        });
+    </script>
+</body>
+</html>
